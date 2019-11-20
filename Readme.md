@@ -9,6 +9,11 @@
 
 ## RUN APP
 
+**Prepare**
+```
+cd backend && yarn
+cd frontend && yarn
+```
 **Up**
 
 ```sh
