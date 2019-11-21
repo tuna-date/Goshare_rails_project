@@ -1,14 +1,24 @@
-# Goshare (GoutShare)
-_enjoy your life, share your experiences and make your friends gout_
+# README
 
-## 1. Build your images and start the containers
-```
-$ docker-compose up --build
-```
-## 2. Create databases for test and develop enviroments
-```
-$ docker-compose run web-app rake db:create
-$ docker-compose run web-app rake db:migrate
-```
-## 3. Up the app
-Go to localhost:5050 
+This README would normally document whatever steps are necessary to get the
+application up and running.
+
+Things you may want to cover:
+
+* Ruby version
+
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
