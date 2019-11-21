@@ -1,4 +1,4 @@
-<h1 align="center">Workflow management👋</h1>
+<h1 align="center">GoShare👋</h1>
 <p>
   <img src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
 </p>
