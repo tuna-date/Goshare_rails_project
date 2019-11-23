@@ -1,5 +1,6 @@
 {
   "name": "backend",
+  "license": "ISC",
   "dependencies": {
     "@rails/webpacker": "^4.2.0"
   },
