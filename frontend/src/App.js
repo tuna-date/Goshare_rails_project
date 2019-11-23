@@ -1,28 +1,16 @@
 import React from 'react';
+import { Provider } from 'react-redux';
+import store from './store';
+import Router from './router';
+
 import './App.css';
-import Header from './components/Header';
-import Post from './components/Post';
 
 function App() {
   return (
     <div className='App'>
-      <Header />
-      <section className='App-main'>
-        <Post
-          nickname='Chris'
-          avatar='https://www.laravelnigeria.com/img/chris.jpg'
-          caption='Moving the community!'
-          image='https://pbs.twimg.com/media/DOXI0IEXkAAkokm.jpg'
-        />
-        <Post
-          nickname='OG'
-          avatar='https://www.laravelnigeria.com/img/chris.jpg'
-          caption='Holding a mic'
-          image='https://pbs.twimg.com/media/DOXI0IEXkAAkokm.jpg'
-        />
-
-        {/* more posts */}
-      </section>
+      <Provider store={store}>
+        <Router />
+      </Provider>
     </div>
   );
 }

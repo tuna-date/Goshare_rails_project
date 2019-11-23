@@ -9,6 +9,11 @@ i.Nav {
   transition: height 0.2s ease-in-out;
   height: 77px;
 }
+
+.Nav-brand {
+  width: 100%;
+}
+
 .Nav-menus {
   display: flex;
   flex-direction: row;
@@ -17,6 +22,7 @@ i.Nav {
   margin: 0 auto;
   padding: 26px 40px;
 }
+
 .Nav-brand-logo {
   display: block;
   background-position: -176px 0px;
@@ -26,4 +32,16 @@ i.Nav {
   height: 35px;
   width: 176px;
   text-indent: -1000%;
+}
+
+.Nav-brand > a:hover {
+  text-decoration: none !important;
+}
+
+.Nav-brand > a {
+  font-size: 1.2rem;
+  padding: 0.25rem;
+  line-height: 1.5;
+  font-weight: 500;
+  color: black;
 }
