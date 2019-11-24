@@ -18,7 +18,7 @@ class UserProfilesController < ApplicationController
         @user = UserAccount.new(user_params)
         if @user.save
             @user.create_user_profile(user_profile_params)
-            render json: @user, status: :created
+            render json @user, status: :created
         else
             render json: { errors: @user.errors.full_messages },
             status: :unprocessable_entity
