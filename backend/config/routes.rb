@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   post '/auth/login', to: 'authentication#login'
   post '/users', to: 'user_profiles#create'
   get '/users', to: 'user_profiles#index'
+  get '/auth/:provider/callback', to: 'authentication#facebook_login'
   get '/*a', to: 'application#not_found'
 end
