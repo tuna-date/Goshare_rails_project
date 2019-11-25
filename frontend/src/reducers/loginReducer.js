@@ -1,7 +1,7 @@
 import * as login from '../actions/loginAction';
 
 const initialState = {
-  isLogin: true,
+  isLogin: false,
   name: 'Taio Newgate',
   nickname: 'Newgate',
   token: '',

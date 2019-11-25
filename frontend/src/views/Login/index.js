@@ -1,7 +1,13 @@
 import React from 'react';
 import './Login.css';
+import axios from 'axios';
 
 class Login extends React.Component {
+  OauthFb = async () => {
+    window.open('http://localhost:5050/auth/facebook', '_blank');
+    // const response = await axios.get('http://localhost:5050/auth/facebook');
+  };
+
   render() {
     return (
       <div className='device'>
@@ -16,7 +22,9 @@ class Login extends React.Component {
           <div className='col-4 box'>
             <p className='title'>Login to Goshare</p>
             <div className='col'>
-              <button className='login-div button-size loginBtn loginBtn--facebook'>
+              <button
+                className='login-div button-size loginBtn loginBtn--facebook'
+                onClick={this.OauthFb}>
                 Login with Facebook
               </button>
 
