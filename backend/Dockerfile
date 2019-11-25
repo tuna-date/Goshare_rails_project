@@ -11,4 +11,4 @@ RUN gem install bundler -v 2.0.1
 RUN bundle install
 RUN yarn install
 
-CMD bundle exec rails s -p 5050 -b "0.0.0.0"
+# CMD bundle exec rails s -p 5050 -b "0.0.0.0"

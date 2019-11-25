@@ -1,26 +1,67 @@
 import React from 'react';
 import './Login.css';
+import axios from 'axios';
 
 class Login extends React.Component {
+  OauthFb = async () => {
+    window.open('http://localhost:5050/auth/facebook', '_blank');
+    // const response = await axios.get('http://localhost:5050/auth/facebook');
+  };
+
   render() {
     return (
-      <article className='Post' ref='Post'>
-        <header>
-          <div className='Post-user'>
-            <div className='Post-user-avatar'>hellp</div>
-            <div className='Post-user-nickname'>
-              <span>hoelpp</span>
+      <div className='device'>
+        <div className='row container'>
+          <div className='col-8'>
+            <div className='device-size'>
+              <figure className='iphone'>iPhone</figure>
+              <figure className='ipad'>iPad</figure>
             </div>
           </div>
-        </header>
-        <div className='Post-image'>
-          <div className='Post-image-bg'>he;;p</div>
+
+          <div className='col-4 box'>
+            <p className='title'>Login to Goshare</p>
+            <div className='col'>
+              <button
+                className='login-div button-size loginBtn loginBtn--facebook'
+                onClick={this.OauthFb}>
+                Login with Facebook
+              </button>
+
+              <button className='login-div button-size loginBtn loginBtn--google'>
+                Login with Google
+              </button>
+            </div>
+            <div className='separator'>OR</div>
+            <div className='form-group login-div'>
+              <div className='col button-size'>
+                <input
+                  type='email'
+                  className='form-control'
+                  id='exampleInputEmail1'
+                  aria-describedby='emailHelp'
+                  placeholder='Enter email'
+                />
+              </div>
+            </div>
+            <div className='form-group login-div'>
+              <div className='col button-size'>
+                <input
+                  type='password'
+                  className='form-control'
+                  id='exampleInputPassword1'
+                  placeholder='Password'
+                />
+              </div>
+            </div>
+            <div className='col login-div'>
+              <button type='submit' className='btn btn-primary button-size'>
+                Login
+              </button>
+            </div>
+          </div>
         </div>
-        <div className='Post-caption'>
-          <strong>hoelpp</strong>
-          sdds
-        </div>
-      </article>
+      </div>
     );
   }
 }
