@@ -16,11 +16,6 @@ cd frontend && yarn
 ```
 _2. Set up facebook app for development </br>
 (only neccessary when use login with facebook feature)_ </br>
-Login facebook with the following account:
-```
-myvwxvnzp@mailtrap.com
-bishay6123
-```
 Go to https://developers.facebook.com/, login with facebook account</br>
 Select **GoShare** application, and get APP_ID, APP_SECRETE from Setting -> Basic infomation, then paste them on _backend/config/initializers/omniauth.rb_ </br>
 **Up**
