@@ -45,3 +45,8 @@ i.Nav {
   font-weight: 500;
   color: black;
 }
+
+.Post-user-nav {
+  display: flex;
+  align-items: center;
+}

@@ -1,10 +1,13 @@
 import * as login from '../actions/loginAction';
 
 const initialState = {
-  isLogin: false,
-  name: '',
+  isLogin: true,
+  name: 'Taio Newgate',
+  nickname: 'Newgate',
   token: '',
-  isLoading: true
+  isLoading: true,
+  image:
+    'https://lh3.googleusercontent.com/-NncmLvZP5l4/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3re14K03xKtbJui9PE-L2dTnt7Jq-Q/photo.jpg?sz=46'
   // NOTE
   // some thing you want to set global
 };
