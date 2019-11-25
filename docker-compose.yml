@@ -9,6 +9,7 @@ services:
       - ./backend:/myapp
     ports:
       - '5050:5050'
+    command: 'yarn install'
     command: 'bundle exec rails s -p 5050 -b "0.0.0.0"'
     stdin_open: true
     tty: true

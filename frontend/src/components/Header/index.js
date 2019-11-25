@@ -14,7 +14,20 @@ class Header extends React.Component {
             <Link className='Nav-brand-logo' to='/'>
               Instagram
             </Link>
-            <Link to='/login'>Login</Link>
+            {this.props.LoginStatus.isLogin ? (
+              <Link to='/profile'>
+                <div className='Post-user-nav'>
+                  <div className='Post-user-avatar'>
+                    <img alt='avatar' src={this.props.LoginStatus.image} />
+                  </div>
+                  <div className='Post-user-nickname'>
+                    <span>{this.props.LoginStatus.nickname}</span>
+                  </div>
+                </div>
+              </Link>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </nav>
