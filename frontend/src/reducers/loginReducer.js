@@ -2,12 +2,12 @@ import * as login from '../actions/loginAction';
 
 const initialState = {
   isLogin: false,
-  name: 'Taio Newgate',
-  nickname: 'Newgate',
+  name: '',
+  nickname: '',
   token: '',
+  userID: '',
   isLoading: true,
-  image:
-    'https://lh3.googleusercontent.com/-NncmLvZP5l4/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3re14K03xKtbJui9PE-L2dTnt7Jq-Q/photo.jpg?sz=46'
+  image: ''
   // NOTE
   // some thing you want to set global
 };
@@ -19,7 +19,8 @@ const loginReducer = (state = initialState, action) => {
         ...state,
         isLogin: action.isLogin,
         name: action.name,
-        token: action.token
+        userID: action.userID,
+        image: action.picture
       };
 
     case login.ISLOADING:
