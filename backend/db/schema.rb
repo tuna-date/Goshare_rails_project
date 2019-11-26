@@ -10,10 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_23_140043) do
+ActiveRecord::Schema.define(version: 2019_11_26_072509) do
+
+  create_table "comments", force: :cascade do |t|
+    t.integer "post_id"
+    t.integer "user_profile_id"
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["user_profile_id"], name: "index_comments_on_user_profile_id"
+  end
 
   create_table "facebook_accounts", force: :cascade do |t|
     t.string "facebook_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.integer "user_profile_id"
+    t.string "content"
+    t.string "image_url"
+    t.string "location_tag"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_profile_id"], name: "index_posts_on_user_profile_id"
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "followed_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -33,6 +60,7 @@ ActiveRecord::Schema.define(version: 2019_11_23_140043) do
     t.integer "account_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "avatar_url"
     t.index ["account_type", "account_id"], name: "index_user_profiles_on_account_type_and_account_id"
   end
 
