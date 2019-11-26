@@ -4,8 +4,11 @@ import axios from 'axios';
 
 class Login extends React.Component {
   OauthFb = async () => {
-    window.open('http://localhost:5050/auth/facebook', '_blank');
-    // const response = await axios.get('http://localhost:5050/auth/facebook');
+    window.open(
+      'http://localhost:5050/auth/facebook',
+      '_blank',
+      'location=yes,height=570,width=520,scrollbars=yes,status=yes'
+    );
   };
 
   render() {
