@@ -21,7 +21,7 @@ class Header extends React.Component {
                     <img alt='avatar' src={this.props.LoginStatus.image} />
                   </div>
                   <div className='Post-user-nickname'>
-                    <span>{this.props.LoginStatus.nickname}</span>
+                    <span>{this.props.LoginStatus.name}</span>
                   </div>
                 </div>
               </Link>
