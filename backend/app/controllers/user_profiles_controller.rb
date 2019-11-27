@@ -8,9 +8,58 @@ class UserProfilesController < ApplicationController
         render json: @users, status: :ok
     end
 
-    # GET /users/{username}
+    # GET /users/:id
     def show
-        render json: @user, status: :ok
+        user_profile = {}
+        user_profile["id"] = @user.id
+        user_profile["name"] = @user.name
+        user_profile["email"] = @user.email
+        user_profile["avatar_url"] = @user.avatar_url
+        user_profile["posts_count"] = @user.posts.count
+        user_profile["following_count"] = @user.following.count
+        user_profile["followers_count"] = @user.followers.count
+        user_profile["is_following_by_current_user"] = @current_user.following.include?(@user)
+        user_profile["posts"] = []
+        sql = " SELECT * 
+                FROM   posts
+                WHERE  user_profile_id = '#{@user.id}'
+                ORDER BY created_at DESC"
+        posts = Post.paginate_by_sql(sql, page: params[:page], per_page: 5)
+        posts.each do |post|
+            profile_post = {}
+            profile_post[:post_id] = post.id
+            profile_post[:image_url] = post.image_url
+            user_profile["posts"].push(profile_post)
+        end
+        render json: user_profile, status: :ok
+    end
+
+    def show_following
+        following = @user.following
+        following_info = []
+        following.each do |user|
+            user_info = {}
+            user_info[:id] = user.id
+            user_info[:name] = user.name
+            user_info[:avatar_url] = user.avatar_url
+            following_info.push(user_info)
+        end
+
+        render json: following_info, status: :ok
+    end
+
+    def show_followers
+        followers = @user.followers
+        followers_info = []
+        followers.each do |user|
+            user_info = {}
+            user_info[:id] = user.id
+            user_info[:name] = user.name
+            user_info[:avatar_url] = user.avatar_url
+            followers_info.push(user_info)
+        end
+
+        render json: followers_info, status: :ok
     end
 
     # POST /users
@@ -18,14 +67,14 @@ class UserProfilesController < ApplicationController
         @user = UserAccount.new(user_params)
         if @user.save
             @user.create_user_profile(user_profile_params)
-            render json @user, status: :created
+            render json: @user, status: :created
         else
             render json: { errors: @user.errors.full_messages },
             status: :unprocessable_entity
         end
     end
 
-    # PUT /users/{username}
+    # PUT /users/:id
     def update
         unless @user.update(user_params)
             render json: { errors: @user.errors.full_messages },
@@ -33,15 +82,22 @@ class UserProfilesController < ApplicationController
         end
     end
 
-    # DELETE /users/{username}
-    def destroy
-        @user.destroy
+    # POST /users/:id/follow
+    def follow
+            @current_user.active_relationships.create(followed_id: @user.id)
+            render json: { is_following_by_current_user: @current_user.following.include?(@user) }, status: :ok
+    end
+
+    # POST /users/:id/unfollow
+    def unfollow
+        @current_user.active_relationships.find_by(followed_id: @user.id).destroy
+        render json: { is_following_by_current_user: @current_user.following.include?(@user) }, status: :ok
     end
 
     private
 
     def find_user
-        @user = UserProfile.find_by_name!(params[:name])
+        @user = UserProfile.find(params[:id])
     rescue ActiveRecord::RecordNotFound
         render json: { errors: 'User not found' }, status: :not_found
     end
