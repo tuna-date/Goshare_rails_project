@@ -1,11 +1,32 @@
 import React, { Component } from 'react';
 import Comment from '../Comment';
+import Modal from 'react-awesome-modal';
+
 import './Post.css';
 
 class Post extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      visible: false
+    };
+  }
+
+  openModal = () => {
+    this.setState({
+      visible: true
+    });
+  };
+
+  closeModal = () => {
+    this.setState({
+      visible: false
+    });
+  };
+
+  like = () => {
+    console.log('like');
+  };
 
   render() {
     const nickname = this.props.nickname;
@@ -25,11 +46,39 @@ class Post extends Component {
             </div>
           </div>
         </header>
-        <div className='Post-image'>
+        <Modal
+          visible={this.state.visible}
+          width='721px'
+          height='500px'
+          effect='fadeInUp'
+          onClickAway={() => this.closeModal()}>
+          <div className='row'>
+            <div className='col-8'>
+              <img className='modal-size row' alt={caption} src={image} />
+            </div>
+            <div className='col-4'>hello</div>
+          </div>
+        </Modal>
+        <div className='Post-image' onClick={this.openModal}>
           <div className='Post-image-bg'>
             <img alt={caption} src={image} />
           </div>
         </div>
+        <div className='col'>
+          <div className='col'>
+            <div className='Post-caption text-left row'>
+              <div className='row like_long'>
+                <ion-icon name='heart'></ion-icon>
+                <strong className='like_number'>150</strong>
+              </div>
+              <div className='row like_long'>
+                <ion-icon name='text'></ion-icon>
+                <strong className='like_number'>4</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div className='Post-caption text-left'>
           <strong>{nickname} </strong>
           {caption}
