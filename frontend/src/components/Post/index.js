@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Comment from '../Comment';
 import './Post.css';
 
 class Post extends Component {
@@ -29,10 +30,12 @@ class Post extends Component {
             <img alt={caption} src={image} />
           </div>
         </div>
-        <div className='Post-caption'>
-          <strong>{nickname}</strong>
+        <div className='Post-caption text-left'>
+          <strong>{nickname} </strong>
           {caption}
         </div>
+        <hr></hr>
+        <Comment />
       </article>
     );
   }
