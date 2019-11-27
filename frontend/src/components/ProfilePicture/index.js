@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Modal from 'react-awesome-modal';
 import './ProfilePicture.css';
 
 function ProfilePicture(props) {
+  const [visible, setVisible] = useState(false);
+
+  const openModal = () => {
+    setVisible(true);
+  };
+
+  const closeModal = () => {
+    setVisible(false);
+  };
+
   return (
     <div className='wrap'>
       <ul className='photo-feed photo-grid'>
@@ -10,21 +21,42 @@ function ProfilePicture(props) {
             <time className='photo-date'>
               <span>
                 <span></span>
-                <span>26</span>
+                <span>26日 </span>
                 <span></span>
-                <span>10 月</span>
+                <span>10月 </span>
                 <span></span>
-                <span>2013</span>
+                <span>2013年 </span>
                 <span></span>
               </span>
             </time>
-            <img className='image-size' src={props.imageUrl} alt={props.imageUrl} />
+            <Modal
+              visible={visible}
+              width='721px'
+              height='500px'
+              effect='fadeInUp'
+              onClickAway={closeModal}>
+              <div className='row'>
+                <div className='col-8'>
+                  <img className='modal-size row' alt={props.imageUrl} src={props.imageUrl} />
+                </div>
+                <div className='col-4'>hello</div>
+              </div>
+            </Modal>
+
+            <img
+              className='image-size'
+              src={props.imageUrl}
+              alt={props.imageUrl}
+              onClick={openModal}
+            />
             <ul className='photo-stats'>
               <li className='stat-likes'>
-                <b>159</b>
+                <ion-icon name='heart'></ion-icon>
+                <b className='text-flex-center'>159</b>
               </li>
               <li className='stat-comments'>
-                <b>23</b>
+                <ion-icon name='text'></ion-icon>
+                <b className='text-flex-center'>23</b>
               </li>
             </ul>
           </div>

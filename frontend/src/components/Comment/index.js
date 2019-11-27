@@ -1,4 +1,4 @@
-import React, { useState, initialState } from 'react';
+import React, { useState } from 'react';
 import './Comment.css';
 
 export default function Comment(props) {
@@ -28,7 +28,7 @@ export default function Comment(props) {
       comment: 'co van toi cao tong thong hoa ki'
     }
   ]);
-  const [commentText, setCommentText] = useState('a');
+  const [commentText, setCommentText] = useState('');
 
   const postComment = () => {
     console.log(commentText);

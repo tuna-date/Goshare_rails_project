@@ -50,3 +50,11 @@ i.Nav {
   display: flex;
   align-items: center;
 }
+
+.camera {
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+  background-size: 30px 30px;
+  background-image: url(../../images/camera.png);
+}
