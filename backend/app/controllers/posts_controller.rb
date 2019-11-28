@@ -30,6 +30,7 @@ class PostsController < ApplicationController
         render json: posts_info, status: :ok
     end
 
+    # Create a post
     def create
         post = @current_user.posts.build(content: params[:content], 
                                         image_url: params[:image_url], 
@@ -41,7 +42,7 @@ class PostsController < ApplicationController
         end
     end
 
-    # post detail 
+    # Return detailed info of a post
     def show
         post_info = {}
         post_info[:id] = @post[:id]
@@ -68,7 +69,7 @@ class PostsController < ApplicationController
         render json: { errors: 'Post not found' }, status: :not_found
     end
 
-    # PUT /posts/:post_id
+    # Update info of a post
     def update
         if @current_user.posts.include?(@post)
             @post.update(content: params[:content],
@@ -80,7 +81,7 @@ class PostsController < ApplicationController
         end
     end
 
-    # DELETE /posts/:post_id
+    # Delete a post
     def delete
         if @current_user.posts.include?(@post)
             @post.destroy

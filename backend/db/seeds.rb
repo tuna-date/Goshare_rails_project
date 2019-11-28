@@ -41,5 +41,7 @@ end
     puts user_id
     followed_id = rand(1..UserProfile.all.count)
     user = UserProfile.find(user_id)
-    user.active_relationships.create(followed_id: followed_id)
+    if user.following.include?(UserProfile.find(followed_id))
+        user.active_relationships.create(followed_id: followed_id)
+    end
 end

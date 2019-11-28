@@ -1,6 +1,6 @@
 class CurrentUserProfileController < ApplicationController
     before_action :authorize_request
-    # GET /users/current_user
+    # Return info of current user profile
     def show
         user_profile = {}
         user_profile["id"] = @current_user.id
@@ -25,6 +25,16 @@ class CurrentUserProfileController < ApplicationController
         render json: user_profile, status: :ok
     end
 
+    # Update info of user
+    def update
+        unless @current_user.update(name: params[:name], avatar_url: params[:avatar_url])
+            render json: { errors: @current_user.errors.full_messages },
+                   status: :unprocessable_entity
+        end
+        render json: @current_user, status: :ok
+    end
+
+    # Return following of current user
     def show_following
         following = @current_user.following
         following_info = []
@@ -39,6 +49,7 @@ class CurrentUserProfileController < ApplicationController
         render json: following_info, status: :ok
     end
 
+    # Return followers of current user
     def show_followers
         followers = @current_user.followers
         followers_info = []
@@ -53,6 +64,7 @@ class CurrentUserProfileController < ApplicationController
         render json: followers_info, status: :ok
     end
 
+    # Return basic info of current user
     def current_user_info
         render json: @current_user, status: :ok
     end
