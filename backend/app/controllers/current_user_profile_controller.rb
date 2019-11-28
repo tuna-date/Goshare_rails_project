@@ -53,4 +53,8 @@ class CurrentUserProfileController < ApplicationController
         render json: followers_info, status: :ok
     end
 
+    def current_user_info
+        render json: @current_user, status: :ok
+    end
+
 end
