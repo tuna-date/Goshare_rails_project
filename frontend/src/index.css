@@ -45,3 +45,12 @@ code {
   margin: 0 auto;
   padding: 26px 40px;
 }
+
+ion-icon {
+  font-size: 20px;
+}
+
+.modal-size {
+  height: 500px !important;
+  width: 500px !important;
+}

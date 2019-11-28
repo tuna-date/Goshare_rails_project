@@ -30,3 +30,7 @@
   visibility: hidden;
   opacity: 0;
 }
+
+.like_long {
+  width: 90px;
+}

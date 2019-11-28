@@ -5,9 +5,24 @@
 }
 
 .userName {
-  font-size: 28px;
+  font-size: 28px !important;
   line-height: 32px;
   margin: -5px 0 -6px;
   font-weight: 300;
   color: rgba(var(--i1d, 38, 38, 38), 1);
+}
+
+.profile-content {
+  text-align: left;
+}
+
+.margin_botton {
+  padding-bottom: 16px;
+}
+
+.profile-image-area {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }

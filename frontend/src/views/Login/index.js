@@ -1,16 +1,18 @@
 import React from 'react';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import store from '../../store';
+import * as loginAction from '../../actions/loginAction';
+import FacebookLogin from 'react-facebook-login';
+
 import './Login.css';
-import axios from 'axios';
 
 class Login extends React.Component {
-  OauthFb = async () => {
-    window.open(
-      'http://localhost:5050/auth/facebook',
-      '_blank',
-      'location=yes,height=570,width=520,scrollbars=yes,status=yes'
-    );
+  responseFacebook = response => {
+    store.dispatch(loginAction.login(response));
   };
 
+  componentClicked = () => console.log('clicked');
   render() {
     return (
       <div className='device'>
@@ -25,11 +27,17 @@ class Login extends React.Component {
           <div className='col-4 box'>
             <p className='title'>Login to Goshare</p>
             <div className='col'>
-              <button
-                className='login-div button-size loginBtn loginBtn--facebook'
-                onClick={this.OauthFb}>
-                Login with Facebook
-              </button>
+              <div className='center'>
+                <div className='login-div button-size loginBtn loginBtn--facebook'>
+                  <FacebookLogin
+                    appId='1347097842155650'
+                    autoLoad={true}
+                    fields='name,email,picture'
+                    onClick={this.componentClicked}
+                    callback={this.responseFacebook}
+                  />
+                </div>
+              </div>
 
               <button className='login-div button-size loginBtn loginBtn--google'>
                 Login with Google
@@ -68,4 +76,11 @@ class Login extends React.Component {
     );
   }
 }
-export default Login;
+
+const mapStatetoProps = state => {
+  return {
+    LoginStatus: state.LoginStatus
+  };
+};
+
+export default compose(connect(mapStatetoProps))(Login);

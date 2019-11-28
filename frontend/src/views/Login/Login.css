@@ -99,6 +99,7 @@
   font-size: 16px;
   color: #fff;
 }
+
 .loginBtn:before {
   content: '';
   box-sizing: border-box;
@@ -108,9 +109,11 @@
   width: 34px;
   height: 100%;
 }
+
 .loginBtn:focus {
   outline: none;
 }
+
 .loginBtn:active {
   box-shadow: inset 0 0 0 32px rgba(0, 0, 0, 0.1);
 }
@@ -127,6 +130,24 @@
   background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_facebook.png') 6px 6px
     no-repeat;
 }
+
+.button-size > span > .kep-login-facebook {
+  font-family: 'Helvetica neue', Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 200;
+  text-transform: none;
+  width: 100%;
+  text-align: left;
+  -webkit-font-smoothing: antialiased;
+  color: #fff;
+  cursor: pointer;
+  background-color: #4c69ba;
+  background-image: linear-gradient(#4c69ba, #3b55a0);
+  border: none;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
 .loginBtn--facebook:hover,
 .loginBtn--facebook:focus {
   background-color: #5b7bd5;
@@ -167,4 +188,8 @@
 }
 .separator::after {
   margin-left: 0.25em;
+}
+.center {
+  display: flex;
+  justify-content: center;
 }
