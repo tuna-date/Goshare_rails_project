@@ -20,7 +20,16 @@ class Header extends React.Component {
                 <div className='col'>
                   <div className='camera'></div>
                 </div>
-                <Link to='/profile'>
+                <Link
+                  to={{
+                    pathname: '/profile',
+                    state: {
+                      userData: {
+                        name: this.props.LoginStatus.name,
+                        user_profile_avatar_url: this.props.LoginStatus.image
+                      }
+                    }
+                  }}>
                   <div className='Post-user-nav'>
                     <div className='Post-user-avatar'>
                       <img alt='avatar' src={this.props.LoginStatus.image} />

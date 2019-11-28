@@ -12,7 +12,8 @@ class Login extends React.Component {
     store.dispatch(loginAction.login(response));
   };
 
-  componentClicked = () => console.log('clicked');
+  // componentClicked = () => console.log('clicked');
+
   render() {
     return (
       <div className='device'>
@@ -33,7 +34,7 @@ class Login extends React.Component {
                     appId='1347097842155650'
                     autoLoad={true}
                     fields='name,email,picture'
-                    onClick={this.componentClicked}
+                    // onClick={this.componentClicked}
                     callback={this.responseFacebook}
                   />
                 </div>
