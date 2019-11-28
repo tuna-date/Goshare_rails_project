@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Comment from '../Comment';
 import Modal from 'react-awesome-modal';
+import { Link } from 'react-router-dom';
 
 import './Post.css';
 
@@ -37,14 +38,22 @@ class Post extends Component {
     return (
       <article className='Post' ref='Post'>
         <header>
-          <div className='Post-user'>
-            <div className='Post-user-avatar'>
-              <img src={avatar} alt={nickname} />
+          <Link
+            to={{
+              pathname: '/profile',
+              state: {
+                userData: this.props.data
+              }
+            }}>
+            <div className='Post-user'>
+              <div className='Post-user-avatar'>
+                <img src={avatar} alt={nickname} />
+              </div>
+              <div className='Post-user-nickname'>
+                <span>{nickname}</span>
+              </div>
             </div>
-            <div className='Post-user-nickname'>
-              <span>{nickname}</span>
-            </div>
-          </div>
+          </Link>
         </header>
         <Modal
           visible={this.state.visible}
