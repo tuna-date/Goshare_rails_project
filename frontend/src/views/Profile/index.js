@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import './Profile.css';
 import ProfilePicture from '../../components/ProfilePicture';
 
-function Profile() {
+function Profile(props) {
   const [info, setInfo] = useState({ ports: '16', follower: '238', follow: '808' });
   const [imageUrls, setImageUrls] = useState([
     { url: 'https://pbs.twimg.com/media/DOXI0IEXkAAkokm.jpg' },
@@ -15,6 +15,7 @@ function Profile() {
     { url: 'https://pbs.twimg.com/media/DOXI0IEXkAAkokm.jpg' }
   ]);
 
+  const { userData } = props.location.state;
   const content = useSelector(state => state);
   return (
     <div className='body-area'>
@@ -22,13 +23,13 @@ function Profile() {
         <div className='profile row'>
           <div className='col-4'>
             <div className='User-avatar'>
-              <img alt='avatar' src={content.LoginStatus.image} />
+              <img alt='avatar' src={userData.user_profile_avatar_url} />
             </div>
           </div>
           <div className='col-8'>
             <div className='col'>
               <div className='row margin_botton'>
-                <p className='userName col-5 profile-content'>{content.LoginStatus.name}</p>
+                <p className='userName col-5 profile-content'>{userData.name}</p>
                 <div className='col-7'>
                   <button type='button' className='btn btn-light'>
                     Chinh sua trang ca nhan
