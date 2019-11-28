@@ -2,13 +2,12 @@ class UserProfilesController < ApplicationController
     before_action :authorize_request, except: :create
     before_action :find_user, except: %i[create index]
 
-    # GET /users
     def index
         @users = UserProfile.all
         render json: @users, status: :ok
     end
 
-    # GET /users/:id
+    # Show info of a user profile
     def show
         user_profile = {}
         user_profile["id"] = @user.id
@@ -34,6 +33,7 @@ class UserProfilesController < ApplicationController
         render json: user_profile, status: :ok
     end
 
+    # Return all user's following
     def show_following
         following = @user.following
         following_info = []
@@ -48,6 +48,7 @@ class UserProfilesController < ApplicationController
         render json: following_info, status: :ok
     end
 
+    # Return all user's followers
     def show_followers
         followers = @user.followers
         followers_info = []
@@ -62,7 +63,7 @@ class UserProfilesController < ApplicationController
         render json: followers_info, status: :ok
     end
 
-    # POST /users
+    # Create a user
     def create
         @user = UserAccount.new(user_params)
         if @user.save
@@ -74,24 +75,22 @@ class UserProfilesController < ApplicationController
         end
     end
 
-    # PUT /users/:id
-    def update
-        unless @user.update(user_params)
-            render json: { errors: @user.errors.full_messages },
-                   status: :unprocessable_entity
+    def follow
+        if @current_user.following.include?(@user)
+            render json: { is_following_by_current_user: @current_user.following.include?(@user) }, status: :ok
+        else
+            @current_user.active_relationships.create(followed_id: @user.id)
+            render json: { is_following_by_current_user: @current_user.following.include?(@user) }, status: :ok
         end
     end
 
-    # POST /users/:id/follow
-    def follow
-            @current_user.active_relationships.create(followed_id: @user.id)
-            render json: { is_following_by_current_user: @current_user.following.include?(@user) }, status: :ok
-    end
-
-    # POST /users/:id/unfollow
     def unfollow
-        @current_user.active_relationships.find_by(followed_id: @user.id).destroy
-        render json: { is_following_by_current_user: @current_user.following.include?(@user) }, status: :ok
+        if @current_user.following.include?(@user)
+            @current_user.active_relationships.find_by(followed_id: @user.id).destroy
+            render json: { is_following_by_current_user: @current_user.following.include?(@user) }, status: :ok
+        else
+            render json: { is_following_by_current_user: @current_user.following.include?(@user) }, status: :ok
+        end
     end
 
     private

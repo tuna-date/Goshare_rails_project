@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
     before_action :authorize_request
+    before_action :find_post, only: [:show, :update, :delete]
     # Show all post in new feed
     def index
         @posts = Post.paginate(page: newfeed_params[:page], per_page: 10).order('created_at DESC')
@@ -29,6 +30,7 @@ class PostsController < ApplicationController
         render json: posts_info, status: :ok
     end
 
+    # Create a post
     def create
         post = @current_user.posts.build(content: params[:content], 
                                         image_url: params[:image_url], 
@@ -40,9 +42,8 @@ class PostsController < ApplicationController
         end
     end
 
-    # post detail 
+    # Return detailed info of a post
     def show
-        @post = Post.find(post_detail_params[:post_id])
         post_info = {}
         post_info[:id] = @post[:id]
         post_info[:content] = @post[:content]
@@ -68,6 +69,27 @@ class PostsController < ApplicationController
         render json: { errors: 'Post not found' }, status: :not_found
     end
 
+    # Update info of a post
+    def update
+        if @current_user.posts.include?(@post)
+            @post.update(content: params[:content],
+                         image_url: params[:image_url],
+                         location_tag: params[:location_tag])
+            render json: @post, status: :ok
+        else
+            render json: { isOk: false }, status: :not_found
+        end
+    end
+
+    # Delete a post
+    def delete
+        if @current_user.posts.include?(@post)
+            @post.destroy
+            render json: { isOk: true }, status: :ok
+        else
+            render json: { isOk: false }, status: :not_found
+        end
+    end
     private
 
     def newfeed_params
@@ -77,4 +99,11 @@ class PostsController < ApplicationController
     def post_detail_params
         params.permit(:post_id)
     end
+
+    def find_post
+        @post = Post.find(params[:post_id])
+    rescue ActiveRecord::RecordNotFound
+        render json: { errors: 'Post not found' }, status: :not_found
+    end
+
 end

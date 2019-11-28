@@ -6,7 +6,9 @@ require 'faker'
     puts name
     email = "test#{i}@gmail.com"
     user_acc = UserAccount.create(name: name, email: email, password: '123456')
-    user_acc.create_user_profile(name: name, email: email)
+    user_acc.create_user_profile(name: name, 
+                                 email: email, 
+                                 avatar_url: 'https://www.sideshow.com/storage/product-images/903429/thanos_marvel_feature.jpg')
 end
 
 ## Posts seeder
@@ -16,6 +18,7 @@ end
     user = UserProfile.find(user_id)
     user.posts.create(
         content: Faker::Food.dish,
+        image_url: 'https://dauhomemade.vn/apps/uploads/2018/09/BunDauDayDu.jpg',
         location_tag: Faker::Address.street_name
     )
 end
@@ -38,5 +41,7 @@ end
     puts user_id
     followed_id = rand(1..UserProfile.all.count)
     user = UserProfile.find(user_id)
-    user.active_relationships.create(followed_id: followed_id)
+    if user.following.include?(UserProfile.find(followed_id))
+        user.active_relationships.create(followed_id: followed_id)
+    end
 end
