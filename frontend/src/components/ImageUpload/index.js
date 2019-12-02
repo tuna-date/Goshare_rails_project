@@ -104,10 +104,10 @@ function ImageUpload(props) {
           .child(image.name)
           .getDownloadURL()
           .then(url => {
-            console.log(url);
+            // console.log(url);
 
             var token = localStorage.getItem('token');
-            console.log(token);
+            // console.log(token);
             axios
               .post(
                 'http://localhost:5050/newfeed/post/create',
