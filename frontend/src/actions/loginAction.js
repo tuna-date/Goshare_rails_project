@@ -9,7 +9,7 @@ export const rememberUser = token => async dispatch => {
       headers: { Authorization: token }
     })
     .then(res => {
-      if (res.status == 200) {
+      if (res.status === 200) {
         res = res.data;
         dispatch({
           type: LOGIN,

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Comment from '../Comment';
 import Modal from 'react-awesome-modal';
 import { Link } from 'react-router-dom';
+import Map from 'pigeon-maps';
+import Marker from 'pigeon-marker';
 
 import './Post.css';
 
@@ -72,7 +74,19 @@ class Post extends Component {
             <div className='col-8'>
               <img className='modal-size row' alt={caption} src={image} />
             </div>
-            <div className='col-4'>hello</div>
+            <div className='col-4' style={{ paddingLeft: 0 }}>
+              <Map
+                defaultCenter={[21.0055203, 105.8411911]}
+                defaultZoom={12}
+                width={235}
+                height={250}>
+                <Marker
+                  anchor={[21.0055203, 105.8411911]}
+                  payload={1}
+                  onClick={this.handleMarkerClick}
+                />
+              </Map>
+            </div>
           </div>
         </Modal>
         <div className='Post-image' onClick={this.openModal}>

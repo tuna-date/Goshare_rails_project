@@ -34,6 +34,7 @@ export default function Home() {
           <Post
             nickname={item.user.name}
             avatar={item.user.user_profile_avatar_url}
+            location={item.location_tag}
             caption={item.content}
             image={item.image_url}
             data={item.user}
