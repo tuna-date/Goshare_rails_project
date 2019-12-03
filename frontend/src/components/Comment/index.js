@@ -1,56 +1,62 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './Comment.css';
 
 export default function Comment(props) {
-  const [comments, setComments] = useState([
-    {
-      user: 'hoang',
-      avatar:
-        'https://lh3.googleusercontent.com/-NncmLvZP5l4/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3re14K03xKtbJui9PE-L2dTnt7Jq-Q/photo.jpg?sz=46',
-      comment: 'co van toi cao tong thong hoa ki'
-    },
-    {
-      user: 'hoang',
-      avatar:
-        'https://lh3.googleusercontent.com/-NncmLvZP5l4/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3re14K03xKtbJui9PE-L2dTnt7Jq-Q/photo.jpg?sz=46',
-      comment: 'co van toi cao tong thong hoa ki'
-    },
-    {
-      user: 'hoang',
-      avatar:
-        'https://lh3.googleusercontent.com/-NncmLvZP5l4/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3re14K03xKtbJui9PE-L2dTnt7Jq-Q/photo.jpg?sz=46',
-      comment: 'co van toi cao tong thong hoa ki'
-    },
-    {
-      user: 'hoang',
-      avatar:
-        'https://lh3.googleusercontent.com/-NncmLvZP5l4/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3re14K03xKtbJui9PE-L2dTnt7Jq-Q/photo.jpg?sz=46',
-      comment: 'co van toi cao tong thong hoa ki'
-    }
-  ]);
   const [commentText, setCommentText] = useState('');
+  const [comments, setComments] = useState();
+  var token = localStorage.getItem('token');
+  const fetchData = async () => {
+    var url = 'http://localhost:5050/newfeed/post/' + props.id;
+    var comment = await axios.get(url, {
+      headers: { Authorization: token }
+    });
+    props.updateCommentNumber(comment.data.all_comments.length);
+    setComments(comment.data.all_comments);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const postComment = () => {
-    console.log(commentText);
+    axios
+      .post(
+        'http://localhost:5050/newfeed/post/comment/create',
+        {
+          post_id: props.id,
+          content: commentText
+        },
+        { headers: { Authorization: token } }
+      )
+      .then(() => {
+        fetchData();
+      });
+    // console.log(commentText);
   };
 
   return (
     <div className='text-left'>
-      {comments.map((comment, index) => (
-        <div key={index} className='col'>
-          <div className='Post-user'>
-            <div className='Post-user-avatar'>
-              <img src={comment.avatar} alt={index} />
+      {comments !== undefined ? (
+        comments.map((comment, index) => (
+          <div key={index} className='col'>
+            <div className='Post-user'>
+              <div className='Post-user-avatar'>
+                <img src={comment.user_info.avatar_url} alt={index} />
+              </div>
+              <div className='Post-user-nickname'>
+                <span>{comment.user_info.name}</span>
+              </div>
             </div>
-            <div className='Post-user-nickname'>
-              <span>{comment.user}</span>
+            <div className='comment-padding'>
+              <div>{comment.content}</div>
             </div>
           </div>
-          <div className='comment-padding'>
-            <div>{comment.comment}</div>
-          </div>
-        </div>
-      ))}
+        ))
+      ) : (
+        <></>
+      )}
+
       <hr />
       <div className='col'>
         <div className='form-group col'>

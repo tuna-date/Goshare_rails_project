@@ -2,6 +2,27 @@ import axios from 'axios';
 
 export const LOGIN = 'LOGIN';
 export const ISLOADING = 'ISLOADING';
+
+export const rememberUser = token => async dispatch => {
+  axios
+    .get('http://localhost:5050/current_user/basic_info', {
+      headers: { Authorization: token }
+    })
+    .then(res => {
+      if (res.status == 200) {
+        res = res.data;
+        dispatch({
+          type: LOGIN,
+          isLogin: true,
+          userID: res.account_id,
+          name: res.name,
+          email: res.email,
+          picture: res.avatar_url
+        });
+      }
+    });
+};
+
 export const login = response => async dispatch => {
   if (response.status !== 'unknown') {
     await axios
