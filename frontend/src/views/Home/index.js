@@ -29,7 +29,6 @@ export default function Home() {
 
   return (
     <div className='' onScroll={handleScroll}>
-      {console.log(items)}
       {items.map(item => (
         <div className='item home-page' key={item.id}>
           <Post

@@ -1,88 +1,105 @@
-import React from 'react';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Modal from 'react-awesome-modal';
+import { useTranslation } from 'react-i18next';
+import i18next from 'i18next';
 
 import './Header.css';
 import ImageUpload from '../ImageUpload';
 
-class Header extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      visible: false
-    };
+function Header(props) {
+  const [visible, setvisible] = useState(false);
+
+  // const { userData } = props.location.state;
+  const content = useSelector(state => state);
+
+  const { t } = useTranslation();
+
+  function handleClick(lang) {
+    i18next.changeLanguage(lang);
   }
 
-  openModal = () => {
-    this.setState({
-      visible: true
-    });
-  };
+  return (
+    <nav className='Nav'>
+      <div className='Nav-menus'>
+        <div className='Nav-brand row justify-content-between'>
+          <Link className='Nav-brand-logo' to='/'>
+            Instagram
+          </Link>
 
-  closeModal = () => {
-    this.setState({
-      visible: false
-    });
-  };
+          {content.LoginStatus.isLogin ? (
+            <div className='row'>
+              <label className='dropdown'>
+                <div className='dd-button'>{t('nav.lang')}</div>
 
-  render() {
-    return (
-      <nav className='Nav'>
-        <div className='Nav-menus'>
-          <div className='Nav-brand row justify-content-between'>
-            <Link className='Nav-brand-logo' to='/'>
-              Instagram
-            </Link>
+                <input type='checkbox' className='dd-input' id='test' />
 
-            {this.props.LoginStatus.isLogin ? (
-              <div className='row'>
-                <div className='col' onClick={this.openModal}>
-                  <div className='camera'></div>
-                </div>
-                <Modal
-                  visible={this.state.visible}
-                  width='721px'
-                  height='500px'
-                  effect='fadeInUp'
-                  onClickAway={() => this.closeModal()}>
-                  <ImageUpload close={this.closeModal} />
-                </Modal>
-                <Link
-                  to={{
-                    pathname: '/profile',
-                    state: {
-                      userData: {
-                        name: this.props.LoginStatus.name,
-                        user_profile_avatar_url: this.props.LoginStatus.image
-                      }
-                    }
-                  }}>
-                  <div className='Post-user-nav'>
-                    <div className='Post-user-avatar'>
-                      <img alt='avatar' src={this.props.LoginStatus.image} />
+                <ul className='dd-menu'>
+                  <li onClick={() => handleClick('en')}>
+                    <div className='col'>
+                      <div className='row'>
+                        <div className='EnFlag'></div>
+                        <div className='col'>EN</div>
+                      </div>
                     </div>
-                    <div className='Post-user-nickname'>
-                      <span>{this.props.LoginStatus.name}</span>
+                  </li>
+                  <li onClick={() => handleClick('vn')}>
+                    <div className='col'>
+                      <div className='row'>
+                        <div className='VnFlag'></div>
+                        <div className='col'>VN</div>
+                      </div>
                     </div>
-                  </div>
-                </Link>
+                  </li>
+                  <li onClick={() => handleClick('jp')}>
+                    <div className='col'>
+                      <div className='row'>
+                        <div className='JpFlag'></div>
+                        <div className='col'>JP</div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </label>
+              <div className='col' onClick={() => setvisible(true)}>
+                <div className='camera'></div>
               </div>
-            ) : (
-              <></>
-            )}
-          </div>
+              <Modal
+                visible={visible}
+                width='721px'
+                height='500px'
+                effect='fadeInUp'
+                onClickAway={() => setvisible(false)}>
+                <ImageUpload close={() => setvisible(false)} />
+              </Modal>
+              <Link
+                to={{
+                  pathname: '/profile',
+                  state: {
+                    userData: {
+                      name: content.LoginStatus.name,
+                      user_profile_avatar_url: content.LoginStatus.image
+                    }
+                  }
+                }}>
+                <div className='Post-user-nav'>
+                  <div className='Post-user-avatar'>
+                    <img alt='avatar' src={content.LoginStatus.image} />
+                  </div>
+                  <div className='Post-user-nickname'>
+                    <span>{content.LoginStatus.name}</span>
+                  </div>
+                </div>
+              </Link>
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
-      </nav>
-    );
-  }
+      </div>
+    </nav>
+  );
 }
 
-const mapStatetoProps = state => {
-  return {
-    LoginStatus: state.LoginStatus
-  };
-};
-
-export default compose(connect(mapStatetoProps))(Header);
+export default Header;
