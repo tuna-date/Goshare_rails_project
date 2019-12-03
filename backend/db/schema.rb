@@ -32,8 +32,7 @@ ActiveRecord::Schema.define(version: 2019_11_26_072509) do
     t.integer "user_profile_id"
     t.string "content"
     t.string "image_url"
-    t.string "location_lat"
-    t.string "location_lng"
+    t.string "location_tag"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_profile_id"], name: "index_posts_on_user_profile_id"
