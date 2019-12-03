@@ -29,11 +29,13 @@ export default function Home() {
 
   return (
     <div className='' onScroll={handleScroll}>
+      {console.log(items)}
       {items.map(item => (
         <div className='item home-page' key={item.id}>
           <Post
             nickname={item.user.name}
             avatar={item.user.user_profile_avatar_url}
+            location={item.location_tag}
             caption={item.content}
             image={item.image_url}
             data={item.user}
