@@ -10,8 +10,7 @@ class PostsController < ApplicationController
             post_info[:id] = post[:id]
             post_info[:content] = post[:content]
             post_info[:image_url] = post[:image_url]
-            post_info[:location_lat] = post[:location_lat]
-            post_info[:location_lng] = post[:location_lng]
+            post_info[:location_tag] = post[:location_tag]
             post_info[:total_comments] = post.comments.count
             nearest_comments = post.comments.limit(5).order('created_at desc')
             post_info[:nearest_comments] = []
@@ -35,8 +34,7 @@ class PostsController < ApplicationController
     def create
         post = @current_user.posts.build(content: params[:content], 
                                         image_url: params[:image_url], 
-                                        location_lat: params[:location_lat],
-                                        location_lng: params[:location_lng])
+                                        location_tag: params[:location_tag])
         if post.save
             render json: post, status: :ok
         else
@@ -50,8 +48,7 @@ class PostsController < ApplicationController
         post_info[:id] = @post[:id]
         post_info[:content] = @post[:content]
         post_info[:image_url] = @post[:image_url]
-        post_info[:location_lat] = @post[:location_lat]
-        post_info[:location_lng] = @post[:location_lng]
+        post_info[:location_tag] = @post[:location_tag]
         post_info[:total_comments] = @post.comments.count
         nearest_comments = @post.comments.order('created_at desc')
         post_info[:all_comments] = []
@@ -77,8 +74,7 @@ class PostsController < ApplicationController
         if @current_user.posts.include?(@post)
             @post.update(content: params[:content],
                          image_url: params[:image_url],
-                         location_lat: params[:location_lat],
-                         location_lng: params[:location_lng])
+                         location_tag: params[:location_tag])
             render json: @post, status: :ok
         else
             render json: { isOk: false }, status: :not_found
