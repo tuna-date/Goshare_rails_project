@@ -19,7 +19,7 @@ end
     user.posts.create(
         content: Faker::Food.dish,
         image_url: 'https://dauhomemade.vn/apps/uploads/2018/09/BunDauDayDu.jpg',
-        location_tag: "Đại Học Bách Khoa Hà Nội",
+        location_tag: "Đại Học Bách Khoa Hà Nội"
     )
 end
 
