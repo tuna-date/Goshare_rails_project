@@ -9,9 +9,16 @@ class Post extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      visible: false
+      visible: false,
+      commentNumber: 0
     };
   }
+
+  setCommentNumber = comment => {
+    this.setState({
+      commentNumber: comment
+    });
+  };
 
   openModal = () => {
     this.setState({
@@ -82,7 +89,7 @@ class Post extends Component {
               </div>
               <div className='row like_long'>
                 <ion-icon name='text'></ion-icon>
-                <strong className='like_number'>4</strong>
+                <strong className='like_number'>{this.state.commentNumber}</strong>
               </div>
             </div>
           </div>
@@ -93,7 +100,7 @@ class Post extends Component {
           {caption}
         </div>
         <hr></hr>
-        <Comment />
+        <Comment id={this.props.id} updateCommentNumber={this.setCommentNumber} />
       </article>
     );
   }

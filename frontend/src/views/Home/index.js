@@ -37,6 +37,7 @@ export default function Home() {
             caption={item.content}
             image={item.image_url}
             data={item.user}
+            id={item.id}
           />
         </div>
       ))}
