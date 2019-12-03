@@ -4,12 +4,10 @@ one:
   user_id: 1
   content: MyString
   image_url: MyString
-  location_lat: MyString
-  location_lng: MyString
+  location_tag: MyString
 
 two:
   user_id: 1
   content: MyString
   image_url: MyString
-  location_lat: MyString
-  location_lng: MyString
+  location_tag: MyString
