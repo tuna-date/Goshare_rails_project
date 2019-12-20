@@ -39,7 +39,6 @@ function Header(props) {
                   <li onClick={() => handleClick('en')}>
                     <div className='col'>
                       <div className='row'>
-                        <div className='EnFlag'></div>
                         <div className='col'>EN</div>
                       </div>
                     </div>
@@ -47,7 +46,6 @@ function Header(props) {
                   <li onClick={() => handleClick('vn')}>
                     <div className='col'>
                       <div className='row'>
-                        <div className='VnFlag'></div>
                         <div className='col'>VN</div>
                       </div>
                     </div>
@@ -55,7 +53,6 @@ function Header(props) {
                   <li onClick={() => handleClick('jp')}>
                     <div className='col'>
                       <div className='row'>
-                        <div className='JpFlag'></div>
                         <div className='col'>JP</div>
                       </div>
                     </div>

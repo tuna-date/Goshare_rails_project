@@ -8,16 +8,19 @@
 ## Description
 
 ## RUN APP
+
 **Prepare**</br>
 _1. Yarn install_ </br>
+
 ```
 cd backend && yarn
 cd frontend && yarn
 ```
+
 _2. Set up facebook app for development </br>
 (only neccessary when use login with facebook feature)_ </br>
 Go to https://developers.facebook.com/, login with facebook account</br>
-Select **GoShare** application, and get APP_ID, APP_SECRETE from Setting -> Basic infomation, then paste them on _backend/config/initializers/omniauth.rb_ </br>
+Select **GoShare** application, and get APP*ID, APP_SECRETE from Setting -> Basic infomation, then paste them on \_backend/config/initializers/omniauth.rb* </br>
 **Up**
 
 ```sh
@@ -35,5 +38,7 @@ docker-compose down
 Export localhost:5050
 
 ### For Reactjs
+
+Create file `.env` and copy content of .env.example file then add googleAPI key
 
 Just code and ctrl+S . Frontend expost localhost:3000

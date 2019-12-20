@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Comment from '../Comment';
 import Modal from 'react-awesome-modal';
 import { Link } from 'react-router-dom';
+import Iframe from 'react-iframe';
 import Map from 'pigeon-maps';
 import Marker from 'pigeon-marker';
 
@@ -75,17 +76,11 @@ class Post extends Component {
               <img className='modal-size row' alt={caption} src={image} />
             </div>
             <div className='col-4' style={{ paddingLeft: 0 }}>
-              <Map
-                defaultCenter={[21.0055203, 105.8411911]}
-                defaultZoom={12}
-                width={235}
-                height={250}>
-                <Marker
-                  anchor={[21.0055203, 105.8411911]}
-                  payload={1}
-                  onClick={this.handleMarkerClick}
-                />
-              </Map>
+              <iframe
+                width='100%'
+                height='250'
+                src={`https://www.google.com/maps/embed/v1/place?q=${this.props.location}&key=${process.env.REACT_APP_GOOGLEMAP_KEY}`}></iframe>
+              <br />
             </div>
           </div>
         </Modal>
