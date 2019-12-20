@@ -142,30 +142,6 @@ a:hover {
   padding: 10px 20px;
 }
 
-.EnFlag {
-  background-image: url(https://dynamospanish.com/wp-content/uploads/flags/images/United_Kingdom/1/small/United_Kingdom.png);
-  background-size: 20px 20px;
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
-}
-
-.VnFlag {
-  background-image: url(https://dynamospanish.com/wp-content/uploads/flags/images/Vietnam/4/small/Vietnam.png);
-  background-size: 20px 20px;
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
-}
-
-.JpFlag {
-  background-image: url(https://dynamospanish.com/wp-content/uploads/flags/images/Japan/4/small/Japan.png);
-  background-size: 25px 20px;
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
-}
-
 li {
   width: 120px;
 }

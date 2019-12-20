@@ -65,7 +65,6 @@ export default function Comment(props) {
               <input
                 type='text'
                 className='form-control-plaintext'
-                id='staticEmail'
                 value={commentText}
                 placeholder='Viet gi do di !!!'
                 onChange={e => setCommentText(e.target.value)}
