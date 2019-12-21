@@ -6,16 +6,16 @@ Rails.application.routes.draw do
 
   post '/users', to: 'user_profiles#create'
   get '/users', to: 'user_profiles#index'
-  get '/users/:user_id/profile/:page', to: 'user_profiles#show'
+  get '/users/:user_id/profile', to: 'user_profiles#show'
   get '/users/:user_id/following', to: 'user_profiles#show_following'
   get '/users/:user_id/followers', to: 'user_profiles#show_followers'
   post '/users/user/follow', to: 'user_profiles#follow'
   post '/users/user/unfollow', to: 'user_profiles#unfollow'
   
   get '/current_user/basic_info', to: 'current_user_profile#current_user_info'
-  get '/current_user/:page', to: 'current_user_profile#show'
-  get '/current_user/following/:page', to: 'current_user_profile#show_following'
-  get '/current_user/followers/:page', to: 'current_user_profile#show_followers'
+  get '/current_user', to: 'current_user_profile#show'
+  get '/current_user/following', to: 'current_user_profile#show_following'
+  get '/current_user/followers', to: 'current_user_profile#show_followers'
   post '/current_user/update', to: 'current_user_profile#update'
 
   post '/newfeed/post/create', to: 'posts#create'
