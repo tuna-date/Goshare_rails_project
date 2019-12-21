@@ -96,7 +96,7 @@ class UserProfilesController < ApplicationController
     private
 
     def find_user
-        @user = UserProfile.find(params[:id])
+        @user = UserProfile.find(params[:user_id])
     rescue ActiveRecord::RecordNotFound
         render json: { errors: 'User not found' }, status: :not_found
     end
