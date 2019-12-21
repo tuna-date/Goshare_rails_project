@@ -1,26 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import Post from '../../components/Post';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import Post from "../../components/Post";
+import { BackTop } from "antd";
+import axios from "axios";
 
 export default function Home() {
   const [items, setItems] = useState([]);
   const [page, setPage] = useState(2);
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     fecthData(1);
   }, []);
 
-  const fecthData = async page => {
-    var token = await localStorage.getItem('token');
-    var url = 'http://localhost:5050/newfeed/' + page;
+  const fecthData = async (page) => {
+    var token = await localStorage.getItem("token");
+    var url = "http://localhost:5050/newfeed/" + page;
     var req = await axios.get(url, {
       headers: { Authorization: token }
     });
-    setItems(items => items.concat(req.data));
+    setItems((items) => items.concat(req.data));
   };
 
-  const handleScroll = e => {
+  const handleScroll = (e) => {
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
       fecthData(page);
       setPage(page + 1);
@@ -29,7 +30,7 @@ export default function Home() {
 
   return (
     <div className='' onScroll={handleScroll}>
-      {items.map(item => (
+      {items.map((item) => (
         <div className='item home-page' key={item.id}>
           <Post
             nickname={item.user.name}
@@ -42,6 +43,9 @@ export default function Home() {
           />
         </div>
       ))}
+      <div>
+        <BackTop />
+      </div>
     </div>
   );
 }
