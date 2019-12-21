@@ -76,7 +76,8 @@ function Header(props) {
                   state: {
                     userData: {
                       name: content.LoginStatus.name,
-                      user_profile_avatar_url: content.LoginStatus.image
+                      user_profile_avatar_url: content.LoginStatus.image,
+                      user_profile_id: content.LoginStatus.userID
                     }
                   }
                 }}>
