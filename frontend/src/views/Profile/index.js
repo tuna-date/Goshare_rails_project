@@ -14,10 +14,10 @@ function Profile(props) {
 
   useEffect(() => {
     fetchUserData();
-  }, []);
+  }, [userData]);
 
   async function fetchUserData() {
-    var url = `http://localhost:5050/users/${userData.user_profile_id}/profile/1`;
+    var url = `http://localhost:5050/users/${userData.user_profile_id}/profile`;
     var data = await axios.get(url, {
       headers: { Authorization: token }
     });
