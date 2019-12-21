@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import Comment from '../Comment';
 import Modal from 'react-awesome-modal';
 import { Link } from 'react-router-dom';
-import Iframe from 'react-iframe';
-import Map from 'pigeon-maps';
-import Marker from 'pigeon-marker';
 
 import './Post.css';
 
@@ -54,7 +51,8 @@ class Post extends Component {
               state: {
                 userData: this.props.data
               }
-            }}>
+            }}
+            params={{ user_name: nickname }}>
             <div className='Post-user'>
               <div className='Post-user-avatar'>
                 <img src={avatar} alt={nickname} />
@@ -77,6 +75,7 @@ class Post extends Component {
             </div>
             <div className='col-4' style={{ paddingLeft: 0 }}>
               <iframe
+                title='myFrame'
                 width='100%'
                 height='250'
                 src={`https://www.google.com/maps/embed/v1/place?q=${this.props.location}&key=${process.env.REACT_APP_GOOGLEMAP_KEY}`}></iframe>

@@ -1,52 +1,102 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 import './Profile.css';
 import ProfilePicture from '../../components/ProfilePicture';
 
 function Profile(props) {
-  const [info, setInfo] = useState({ ports: '16', follower: '238', follow: '808' });
-  const [imageUrls, setImageUrls] = useState([
-    { url: 'https://pbs.twimg.com/media/DOXI0IEXkAAkokm.jpg' },
-    { url: 'https://pbs.twimg.com/media/DOXI0IEXkAAkokm.jpg' },
-    { url: 'https://pbs.twimg.com/media/DOXI0IEXkAAkokm.jpg' },
-    { url: 'https://pbs.twimg.com/media/DOXI0IEXkAAkokm.jpg' },
-    { url: 'https://pbs.twimg.com/media/DOXI0IEXkAAkokm.jpg' },
-    { url: 'https://pbs.twimg.com/media/DOXI0IEXkAAkokm.jpg' }
-  ]);
+  const [profileData, setProfileData] = useState({});
 
   const { userData } = props.location.state;
   const content = useSelector(state => state);
+  var token = localStorage.getItem('token');
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
+  async function fetchUserData() {
+    var url = `http://localhost:5050/users/${userData.user_profile_id}/profile/1`;
+    var data = await axios.get(url, {
+      headers: { Authorization: token }
+    });
+    setProfileData(data.data);
+  }
+
+  async function followUser() {
+    var url = `http://localhost:5050/users/user/follow`;
+    axios
+      .post(
+        url,
+        {
+          user_id: profileData.id
+        },
+        {
+          headers: { Authorization: token }
+        }
+      )
+      .then(() => {
+        fetchUserData();
+      });
+  }
+
+  async function unfollowUser() {
+    var url = `http://localhost:5050/users/user/unfollow`;
+    axios
+      .post(
+        url,
+        {
+          user_id: profileData.id
+        },
+        {
+          headers: { Authorization: token }
+        }
+      )
+      .then(() => {
+        fetchUserData();
+      });
+  }
+
   return (
     <div className='body-area'>
       <div className='content'>
         <div className='profile row'>
           <div className='col-4'>
             <div className='User-avatar'>
-              <img alt='avatar' src={userData.user_profile_avatar_url} />
+              <img alt='avatar' src={profileData.avatar_url} />
             </div>
           </div>
           <div className='col-8'>
             <div className='col'>
-              <div className='row margin_botton'>
-                <p className='userName col-5 profile-content'>{userData.name}</p>
-                <div className='col-7'>
-                  <button type='button' className='btn btn-light'>
-                    Chinh sua trang ca nhan
+              <div className='row margin_botton justify-content-around'>
+                <p className='userName profile-content'>{profileData.name}</p>
+                <button type='button' className='btn btn-light'>
+                  Chinh sua trang ca nhan
+                </button>
+                {profileData.id === content.LoginStatus.userID ? (
+                  ''
+                ) : profileData.is_following_by_current_user ? (
+                  <button type='button' className='btn btn-light' onClick={unfollowUser}>
+                    Huy theo doi
                   </button>
-                </div>
+                ) : (
+                  <button type='button' className='btn btn-light' onClick={followUser}>
+                    Theo doi
+                  </button>
+                )}
               </div>
             </div>
             <div className='col profile-content'>
               <div className='row'>
                 <p className='col-3 profile-content'>
-                  <strong>{info.ports}</strong> Bai viet
+                  <strong>{profileData.posts_count}</strong> Bai viet
                 </p>
                 <p className='col-4 profile-content'>
-                  <strong>{info.follow}</strong> nguoi theo doi
+                  <strong>{profileData.following_count}</strong> nguoi theo doi
                 </p>
                 <p className='col-5 profile-content'>
-                  Dang theo doi <strong>{info.follower}</strong>
+                  Dang theo doi <strong>{profileData.followers_count}</strong>
                 </p>
               </div>
             </div>
@@ -55,9 +105,11 @@ function Profile(props) {
       </div>
       <hr />
       <div className='profile-image-area'>
-        {imageUrls.map((imageUrl, index) => (
-          <ProfilePicture key={index} imageUrl={imageUrl.url} />
-        ))}
+        {profileData.posts
+          ? profileData.posts.map((imageUrl, index) => (
+              <ProfilePicture key={index} imageUrl={imageUrl.image_url} />
+            ))
+          : ''}
       </div>
     </div>
   );
