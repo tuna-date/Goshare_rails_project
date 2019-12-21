@@ -73,9 +73,19 @@ class UserProfilesController < ApplicationController
 
     def follow
         if @current_user.following.include?(@user)
+            # render data for realtime
+            ActionCable.server.broadcast 'follow',
+                from: @current_user.name,
+                to: @user.name
+            # end realtime
             render json: { is_following_by_current_user: @current_user.following.include?(@user) }, status: :ok
         else
             @current_user.active_relationships.create(followed_id: @user.id)
+            # render data for realtime
+            ActionCable.server.broadcast 'follow',
+                from: @current_user.name,
+                to: @user.name
+            # end realtime
             render json: { is_following_by_current_user: @current_user.following.include?(@user) }, status: :ok
         end
     end
