@@ -3,24 +3,20 @@ class CurrentUserProfileController < ApplicationController
     # Return info of current user profile
     def show
         user_profile = {}
-        user_profile["id"] = @current_user.id
-        user_profile["name"] = @current_user.name
-        user_profile["email"] = @current_user.email
-        user_profile["avatar_url"] = @current_user.avatar_url
-        user_profile["posts_count"] = @current_user.posts.count
-        user_profile["following_count"] = @current_user.following.count
-        user_profile["followers_count"] = @current_user.followers.count
-        user_profile["posts"] = []
-        sql = " SELECT * 
-                FROM   posts
-                WHERE  user_profile_id = '#{@current_user.id}'
-                ORDER BY created_at DESC"
-        posts = Post.paginate_by_sql(sql, page: params[:page], per_page: 5)
+        user_profile[:id] = @current_user.id
+        user_profile[:name] = @current_user.name
+        user_profile[:email] = @current_user.email
+        user_profile[:avatar_url] = @current_user.avatar_url
+        user_profile[:posts_count] = @current_user.posts.count
+        user_profile[:following_count] = @current_user.following.count
+        user_profile[:followers_count] = @current_user.followers.count
+        user_profile[:posts] = []
+        posts = @current_user.posts
         posts.each do |post|
             profile_post = {}
             profile_post[:post_id] = post.id
             profile_post[:image_url] = post.image_url
-            user_profile["posts"].push(profile_post)
+            user_profile[:posts].push(profile_post)
         end
         render json: user_profile, status: :ok
     end
