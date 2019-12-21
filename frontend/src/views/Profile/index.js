@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { ActionCableConsumer } from 'react-actioncable-provider';
 import axios from 'axios';
+import { notification } from 'antd';
 
 import './Profile.css';
 import ProfilePicture from '../../components/ProfilePicture';
@@ -58,8 +60,28 @@ function Profile(props) {
       });
   }
 
+  function handleReceivedConversation(response) {
+    console.log(response);
+    if (response.to === content.LoginStatus.name) {
+      openNotification(response.to);
+      fetchUserData();
+    }
+  }
+
+  function openNotification(follower) {
+    notification.open({
+      message: follower + ' start following you',
+      description: `Be the inspiration for ${follower} !!`,
+      onClick: () => {
+        console.log('Notification Clicked!');
+      }
+    });
+  }
+
   return (
     <div className='body-area'>
+      <ActionCableConsumer channel='NotificationChannel' onReceived={handleReceivedConversation} />
+
       <div className='content'>
         <div className='profile row'>
           <div className='col-4'>
@@ -93,10 +115,10 @@ function Profile(props) {
                   <strong>{profileData.posts_count}</strong> Bai viet
                 </p>
                 <p className='col-4 profile-content'>
-                  <strong>{profileData.following_count}</strong> nguoi theo doi
+                  <strong>{profileData.followers_count}</strong> nguoi theo doi ban
                 </p>
                 <p className='col-5 profile-content'>
-                  Dang theo doi <strong>{profileData.followers_count}</strong>
+                  Ban dang theo doi <strong>{profileData.following_count}</strong> nguoi
                 </p>
               </div>
             </div>
