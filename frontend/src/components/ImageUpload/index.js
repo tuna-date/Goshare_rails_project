@@ -1,65 +1,66 @@
-import React, { useState, useEffect } from 'react';
-import { useDropzone } from 'react-dropzone';
-import { storage } from '../../firebase';
-import axios from 'axios';
-import { Redirect } from 'react-router';
+import React, { useState, useEffect } from "react";
+import { useDropzone } from "react-dropzone";
+import { storage } from "../../firebase";
+import axios from "axios";
+import { Redirect } from "react-router";
 
-import './ImageUpload.css';
+import "./ImageUpload.css";
 
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 
 const thumbsContainer = {
-  display: 'flex',
-  flexDirection: 'row',
-  flexWrap: 'wrap',
+  display: "flex",
+  flexDirection: "row",
+  flexWrap: "wrap",
   marginTop: 16
 };
 
 const style = {
-  height: '100%',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'center'
+  height: "100%",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center"
 };
 
 const thumb = {
-  display: 'inline-flex',
+  display: "inline-flex",
   borderRadius: 2,
-  border: '1px solid #eaeaea',
+  border: "1px solid #eaeaea",
   marginBottom: 8,
   marginRight: 8,
   width: 100,
   height: 100,
   padding: 4,
-  boxSizing: 'border-box'
+  boxSizing: "border-box"
 };
 
 const thumbInner = {
-  display: 'flex',
+  display: "flex",
   minWidth: 0,
-  overflow: 'hidden'
+  overflow: "hidden"
 };
 
 const img = {
-  display: 'block',
-  width: 'auto',
-  height: '100%'
+  display: "block",
+  width: "auto",
+  height: "100%"
 };
 
 function ImageUpload(props) {
-  const [commentText, setCommentText] = useState('');
+  const [commentText, setCommentText] = useState("");
+  const [location, setLocation] = useState("");
   const [files, setFiles] = useState([]);
   const [redirect, setRedirect] = useState(false);
 
   const { t } = useTranslation();
 
   const { getRootProps, getInputProps } = useDropzone({
-    accept: 'image/*',
-    onDrop: acceptedFiles => {
+    accept: "image/*",
+    onDrop: (acceptedFiles) => {
       setFiles(
-        acceptedFiles.map(file =>
+        acceptedFiles.map((file) =>
           Object.assign(file, {
             preview: URL.createObjectURL(file)
           })
@@ -68,7 +69,7 @@ function ImageUpload(props) {
     }
   });
 
-  const thumbs = files.map(file => (
+  const thumbs = files.map((file) => (
     <div style={thumb} key={file.name}>
       <div style={thumbInner}>
         <img src={file.preview} style={img} />
@@ -83,7 +84,7 @@ function ImageUpload(props) {
   useEffect(
     () => () => {
       // Make sure to revoke the data uris to avoid memory leaks
-      files.forEach(file => URL.revokeObjectURL(file.preview));
+      files.forEach((file) => URL.revokeObjectURL(file.preview));
     },
     [files]
   );
@@ -92,43 +93,43 @@ function ImageUpload(props) {
     const image = files[0];
     const uploadTask = storage.ref(`images/${image.path}`).put(image);
     uploadTask.on(
-      'state_changed',
-      snapshot => {
+      "state_changed",
+      (snapshot) => {
         // progrss function ....
         // const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
         // this.setState({ progress });
       },
-      error => {
+      (error) => {
         // error function ....
         console.log(error);
       },
       () => {
         // complete function ....
         storage
-          .ref('images')
+          .ref("images")
           .child(image.name)
           .getDownloadURL()
-          .then(url => {
+          .then((url) => {
             // console.log(url);
 
-            var token = localStorage.getItem('token');
+            var token = localStorage.getItem("token");
             // console.log(token);
             axios
               .post(
-                'http://localhost:5050/newfeed/post/create',
+                "http://localhost:5050/newfeed/post/create",
                 {
                   content: commentText,
                   image_url: url,
-                  location_tag: 'abc'
+                  location_tag: location
                 },
                 { headers: { Authorization: token } }
               )
-              .then(res => {
+              .then((res) => {
                 console.log(res);
                 props.close();
                 setRedirect(true);
               })
-              .catch(error => {
+              .catch((error) => {
                 console.log(error);
               });
           });
@@ -141,21 +142,32 @@ function ImageUpload(props) {
       {redirect ? <Redirect push to='/' /> : <></>}
       <br />
       <section className='container'>
-        <div className='drag-box' {...getRootProps({ className: 'dropzone' })}>
+        <div className='drag-box' {...getRootProps({ className: "dropzone" })}>
           <input {...getInputProps()} />
           <p>{t("image_uploader.drag_box_description")}</p>
         </div>
         <aside style={thumbsContainer} onClick={removeImage}>
           {thumbs}
         </aside>
-        <input
-          type='text'
-          className='form-control'
-          value={commentText}
-          placeholder={t("image_uploader.caption_place_holder")}
-          onChange={e => setCommentText(e.target.value)}
-        />
-        <div className='botton-area'>
+        <div>
+          <input
+            type='text'
+            className='form-control'
+            value={commentText}
+            placeholder={t("image_uploader.caption_place_holder")}
+            onChange={(e) => setCommentText(e.target.value)}
+          />
+        </div>
+        <div className='input'>
+          <input
+            type='text'
+            className='form-control'
+            value={location}
+            placeholder={t("image_uploader.location_place_holder")}
+            onChange={(e) => setLocation(e.target.value)}
+          />
+        </div>
+        <div className='button-area'>
           <button className='btn btn-light' onClick={handleUpload}>
             {t("image_uploader.upload_button")}
           </button>
