@@ -5,14 +5,14 @@
   "login_page": {
     "login_container": {
       "title": "GoShareにログインしてください",
-      "facebook_button": "フェイスブックログイン",
-      "google_button": "グーグルログイン",
+      "facebook_button": "Facebookでログイン",
+      "google_button": "Googleでログイン",
       "login_button": "ログイン"
     }
   },
   "home_page": {},
   "profile_page": {
-    "profile_edit_button": "プロフィールを編集",
+    "profile_edit_button": "プロフィールを編集する",
     "follow_button": "フォロー",
     "unfollow_button": "フォロー解除",
     "post": " 投稿",
@@ -22,20 +22,21 @@
   },
   "header": {},
   "comment": {
-    "place_holder": "コメントを追加...",
-    "upload_button": "アップロード"
+    "place_holder": "コメントを追加する...",
+    "upload_button": "コメント"
   },
   "image_uploader": {
-    "drag_box_description": "写真を選択あるいはドラッグ",
+    "drag_box_description": "写真を選択するか、ドラッグしてここにドロップしてください",
     "caption_place_holder": "この写真について教えてください...",
+    "location_place_holder": "場所を追加する",
     "upload_button": "アップロード"
   },
   "post": {},
   "profile_picture": {
     "photo_grid": {
-      "photo_year": "/",
-      "photo_month": "/",
-      "photo_day": "/"
+      "photo_year": "年",
+      "photo_month": "月",
+      "photo_day": "日"
     }
   }
 }

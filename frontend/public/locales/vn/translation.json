@@ -28,6 +28,7 @@
   "image_uploader": {
     "drag_box_description": "Kéo ảnh và thả vào đây, hoặc click để lựa chọn",
     "caption_place_holder": "Viết gì đó về ảnh này...",
+    "location_place_holder": "Thêm địa điểm",
     "upload_button": "Đăng"
   },
   "post": {},
