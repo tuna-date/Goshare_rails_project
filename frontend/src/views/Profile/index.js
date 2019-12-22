@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { ActionCableConsumer } from "react-actioncable-provider";
 import axios from "axios";
-import { BackTop, notification } from "antd";
+import { BackTop } from "antd";
 
 import "./Profile.css";
 import ProfilePicture from "../../components/ProfilePicture";
@@ -61,21 +61,9 @@ function Profile(props) {
   }
 
   function handleReceivedConversation(response) {
-    console.log(response);
     if (response.to === content.LoginStatus.name) {
-      openNotification(response.to);
       fetchUserData();
     }
-  }
-
-  function openNotification(follower) {
-    notification.open({
-      message: follower + " start following you",
-      description: `Be the inspiration for ${follower} !!`,
-      onClick: () => {
-        console.log("Notification Clicked!");
-      }
-    });
   }
 
   return (
@@ -144,6 +132,9 @@ function Profile(props) {
               <ProfilePicture key={index} imageUrl={imageUrl.image_url} />
             ))
           : ""}
+      </div>
+      <div>
+        <BackTop />
       </div>
       <div>
         <BackTop />

@@ -125,6 +125,7 @@
   transition: background-color 0.05s ease-out;
 }
 .photo-stats {
+  display: flex;
   font-size: 13px;
   /* color: rgb(153, 153, 153); */
   color: #000;

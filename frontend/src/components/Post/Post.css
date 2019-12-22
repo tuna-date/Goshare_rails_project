@@ -38,3 +38,7 @@
 .map {
   width: 100%;
 }
+
+.ant-rate {
+  display: flex !important;
+}

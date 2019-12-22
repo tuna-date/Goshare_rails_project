@@ -2,17 +2,27 @@ import React, { Component } from 'react';
 import Comment from '../Comment';
 import Modal from 'react-awesome-modal';
 import { Link } from 'react-router-dom';
+import { Rate } from 'antd';
 
 import './Post.css';
+
+const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
 
 class Post extends Component {
   constructor(props) {
     super(props);
     this.state = {
       visible: false,
+      starNumber: 2,
       commentNumber: 0
     };
   }
+
+  handleChange = star => {
+    this.setState({
+      starNumber: star
+    });
+  };
 
   setCommentNumber = comment => {
     this.setState({
@@ -78,8 +88,23 @@ class Post extends Component {
                 title='myFrame'
                 width='100%'
                 height='250'
-                src={`https://www.google.com/maps/embed/v1/place?q=${this.props.location}&key=${process.env.REACT_APP_GOOGLEMAP_KEY}`}></iframe>
+                src={`https://www.google.com/maps/embed/v1/place?q=${this.props.location}&key=${process.env.REACT_APP_GOOGLEMAP_KEY}`}
+              />
               <br />
+              <strong>Rating:</strong>
+              <Rate
+                style={{ fontSize: '20px', display: 'inline-block !important' }}
+                tooltips={desc}
+                onChange={this.handleChange}
+                value={this.state.starNumber}
+              />
+              {this.state.starNumber ? (
+                <span className='ant-rate-text'>
+                  <strong>{desc[this.state.starNumber - 1]}</strong>
+                </span>
+              ) : (
+                ''
+              )}
             </div>
           </div>
         </Modal>

@@ -22,7 +22,10 @@ export default function Home() {
   };
 
   const handleScroll = (e) => {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+    if (
+      window.innerHeight + window.scrollY >=
+      (page - 1) * 10 * document.body.offsetHeight
+    ) {
       fecthData(page);
       setPage(page + 1);
     }
@@ -30,8 +33,8 @@ export default function Home() {
 
   return (
     <div className='' onScroll={handleScroll}>
-      {items.map((item) => (
-        <div className='item home-page' key={item.id}>
+      {items.map((item, index) => (
+        <div className='item home-page' key={index}>
           <Post
             nickname={item.user.name}
             avatar={item.user.user_profile_avatar_url}
