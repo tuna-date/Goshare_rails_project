@@ -14,7 +14,7 @@ export const rememberUser = token => async dispatch => {
         dispatch({
           type: LOGIN,
           isLogin: true,
-          userID: res.account_id,
+          userID: res.id,
           name: res.name,
           email: res.email,
           picture: res.avatar_url
@@ -34,19 +34,20 @@ export const login = response => async dispatch => {
       })
       .then(res => {
         localStorage.setItem('token', res.data.token);
+        dispatch(rememberUser(res.data.token));
       })
       .catch(error => {
         console.log(error);
       });
 
-    dispatch({
-      type: LOGIN,
-      isLogin: true,
-      userID: response.userID,
-      name: response.name,
-      email: response.email,
-      picture: response.picture.data.url
-    });
+    // dispatch({
+    //   type: LOGIN,
+    //   isLogin: true,
+    //   userID: response.userID,
+    //   name: response.name,
+    //   email: response.email,
+    //   picture: response.picture.data.url
+    // });
   }
 };
 
