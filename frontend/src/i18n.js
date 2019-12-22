@@ -1,28 +1,37 @@
-import i18n from 'i18next';
-import Backend from 'i18next-xhr-backend';
-import { initReactI18next } from 'react-i18next';
+import i18n from "i18next";
+import Backend from "i18next-xhr-backend";
+import { initReactI18next } from "react-i18next";
+import LanguageDetector from "i18next-browser-languagedetector";
 
-const fallbackLng = ['en'];
-const availableLanguages = ['en', 'vn', 'jp'];
+const fallbackLng = ["en"];
+const availableLanguages = ["en", "vn", "jp"];
 
 const options = {
   // order and from where user language should be detected
-  order: ['navigator', 'htmlTag', 'path', 'subdomain'],
+  order: [
+    "querystring",
+    "cookie",
+    "localStorage",
+    "navigator",
+    "htmlTag",
+    "path",
+    "subdomain"
+  ],
 
   // keys or params to lookup language from
-  lookupQuerystring: 'lng',
-  lookupCookie: 'i18next',
-  lookupLocalStorage: 'i18nextLng',
+  lookupQuerystring: "lng",
+  lookupCookie: "i18next",
+  lookupLocalStorage: "i18nextLng",
   lookupFromPathIndex: 0,
   lookupFromSubdomainIndex: 0,
 
   // cache user language on
-  caches: ['localStorage', 'cookie'],
-  excludeCacheFor: ['cimode'], // languages to not persist (cookie, localStorage)
+  caches: ["localStorage", "cookie"],
+  excludeCacheFor: ["cimode"], // languages to not persist (cookie, localStorage)
 
   // optional expire and domain for set cookie
   cookieMinutes: 10,
-  cookieDomain: 'myDomain',
+  cookieDomain: "myDomain",
 
   // optional htmlTag with lang attribute, the default is:
   htmlTag: document.documentElement,
@@ -33,6 +42,8 @@ const options = {
 
 i18n
   .use(Backend) // load translation using xhr -> see /public/locales. We will add locales in the next step
+
+  .use(LanguageDetector)
 
   .use(initReactI18next) // pass the i18n instance to react-i18next.
 
