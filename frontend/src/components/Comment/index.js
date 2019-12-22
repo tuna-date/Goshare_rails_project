@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Comment.css';
 
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
+
 export default function Comment(props) {
   const [commentText, setCommentText] = useState('');
   const [comments, setComments] = useState();
@@ -14,6 +17,8 @@ export default function Comment(props) {
     props.updateCommentNumber(comment.data.all_comments.length);
     setComments(comment.data.all_comments);
   };
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchData();
@@ -54,8 +59,8 @@ export default function Comment(props) {
           </div>
         ))
       ) : (
-        <></>
-      )}
+          <></>
+        )}
 
       <hr />
       <div className='col'>
@@ -66,13 +71,13 @@ export default function Comment(props) {
                 type='text'
                 className='form-control-plaintext'
                 value={commentText}
-                placeholder='Viet gi do di !!!'
+                placeholder={t("comment.place_holder")}
                 onChange={e => setCommentText(e.target.value)}
               />
             </div>
             <div>
               <button type='button' className='btn btn-light' onClick={postComment}>
-                Post
+                {t("comment.upload_button")}
               </button>
             </div>
           </div>

@@ -7,12 +7,17 @@ import { BackTop } from 'antd';
 import './Profile.css';
 import ProfilePicture from '../../components/ProfilePicture';
 
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
+
 function Profile(props) {
   const [profileData, setProfileData] = useState({});
 
   const { userData } = props.location.state;
   const content = useSelector(state => state);
   var token = localStorage.getItem('token');
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchUserData();
@@ -80,32 +85,41 @@ function Profile(props) {
             <div className='col'>
               <div className='row margin_botton justify-content-around'>
                 <p className='userName profile-content'>{profileData.name}</p>
-
                 {profileData.id === content.LoginStatus.userID ? (
                   <button type='button' className='btn btn-light'>
-                    Chinh sua trang ca nhan
+                    {t("profile_page.profile_edit_button")}
                   </button>
                 ) : profileData.is_following_by_current_user ? (
-                  <button type='button' className='btn btn-light' onClick={unfollowUser}>
-                    Huy theo doi
+                  <button
+                    type='button'
+                    className='btn btn-light'
+                    onClick={unfollowUser}
+                  >
+                    {t("profile_page.unfollow_button")}
                   </button>
                 ) : (
-                  <button type='button' className='btn btn-light' onClick={followUser}>
-                    Theo doi
-                  </button>
-                )}
+                      <button
+                        type='button'
+                        className='btn btn-light'
+                        onClick={followUser}
+                      >
+                        {t("profile_page.follow_button")}
+                      </button>
+                    )}
               </div>
             </div>
             <div className='col profile-content'>
               <div className='row'>
                 <p className='col-3 profile-content'>
-                  <strong>{profileData.posts_count}</strong> Bai viet
+                  <strong>{profileData.posts_count}</strong> {t("profile_page.post")}
                 </p>
                 <p className='col-4 profile-content'>
-                  <strong>{profileData.followers_count}</strong> nguoi theo doi ban
+                  <strong>{profileData.followers_count}</strong>
+                  {t("profile_page.follower")}
                 </p>
                 <p className='col-5 profile-content'>
-                  Ban dang theo doi <strong>{profileData.following_count}</strong> nguoi
+                  {t("profile_page.following_prefix")}{" "}
+                  <strong>{profileData.following_count}</strong> {t("profile_page.following_postfix")}
                 </p>
               </div>
             </div>
@@ -116,9 +130,9 @@ function Profile(props) {
       <div className='profile-image-area'>
         {profileData.posts
           ? profileData.posts.map((imageUrl, index) => (
-              <ProfilePicture key={index} imageUrl={imageUrl.image_url} />
-            ))
-          : ''}
+            <ProfilePicture key={index} imageUrl={imageUrl.image_url} />
+          ))
+          : ""}
       </div>
       <div>
         <BackTop />

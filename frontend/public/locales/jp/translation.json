@@ -1,5 +1,41 @@
 {
   "nav": {
     "lang": "日本語"
+  },
+  "login_page": {
+    "login_container": {
+      "title": "GoShareにログインしてください",
+      "facebook_button": "フェイスブックログイン",
+      "google_button": "グーグルログイン",
+      "login_button": "ログイン"
+    }
+  },
+  "home_page": {},
+  "profile_page": {
+    "profile_edit_button": "プロフィールを編集",
+    "follow_button": "フォロー",
+    "unfollow_button": "フォロー解除",
+    "post": " 投稿",
+    "follower": " フォロワー ",
+    "following_prefix": "フォロワー中 ",
+    "following_postfix": " 人"
+  },
+  "header": {},
+  "comment": {
+    "place_holder": "コメントを追加...",
+    "upload_button": "アップロード"
+  },
+  "image_uploader": {
+    "drag_box_description": "写真を選択あるいはドラッグ",
+    "caption_place_holder": "この写真について教えてください...",
+    "upload_button": "アップロード"
+  },
+  "post": {},
+  "profile_picture": {
+    "photo_grid": {
+      "photo_year": "/",
+      "photo_month": "/",
+      "photo_day": "/"
+    }
   }
 }

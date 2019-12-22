@@ -21,11 +21,11 @@ function ProfilePicture(props) {
             <time className='photo-date'>
               <span>
                 <span></span>
-                <span>2013年 </span>
+                <span>2013/ </span>
                 <span></span>
-                <span>10月 </span>
+                <span>10/ </span>
                 <span></span>
-                <span>26日 </span>
+                <span>26 </span>
                 <span></span>
               </span>
             </time>
@@ -44,7 +44,7 @@ function ProfilePicture(props) {
                     src={props.imageUrl}
                   />
                 </div>
-                <div className='col-4'>hello</div>
+                {/* <div className='col-4'>hello</div> */}
               </div>
             </Modal>
 

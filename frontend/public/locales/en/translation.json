@@ -1,5 +1,41 @@
 {
   "nav": {
     "lang": "English"
+  },
+  "login_page": {
+    "login_container": {
+      "title": "Login into GoShare",
+      "facebook_button": "Facebook Login",
+      "google_button": "Google Login",
+      "login_button": "Login"
+    }
+  },
+  "home_page": {},
+  "profile_page": {
+    "profile_edit_button": "Edit your profile",
+    "follow_button": "Follow",
+    "unfollow_button": "Unfollow",
+    "post": " posts",
+    "follower": " follower ",
+    "following_prefix": "Following ",
+    "following_postfix": " users"
+  },
+  "header": {},
+  "comment": {
+    "place_holder": "Add comment...",
+    "upload_button": "Upload"
+  },
+  "image_uploader": {
+    "drag_box_description": "Choose a picture or drag it here",
+    "caption_place_holder": "Tell others more about this picture...",
+    "upload_button": "Upload"
+  },
+  "post": {},
+  "profile_picture": {
+    "photo_grid": {
+      "photo_year": "/",
+      "photo_month": "/",
+      "photo_day": "/"
+    }
   }
 }
