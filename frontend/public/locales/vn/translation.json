@@ -1,46 +1,5 @@
 {
   "nav": {
-    "lang": "Tiếng Việt"
-  },
-  "login_page": {
-    "login_container": {
-      "title": "Đăng nhập vào GoShare",
-      "facebook_button": "Đăng nhập với Facebook",
-      "google_button": "Đăng nhập với Google",
-      "login_button": "Đăng nhập"
-    }
-  },
-  "home_page": {
-
-  },
-  "profile_page": {
-    "profile_edit_button": "Chỉnh sửa trang cá nhân",
-    "follow_button": "Theo dõi",
-    "unfollow_button": "Bỏ theo dõi",
-    "post": " bài viết",
-    "follower": " người theo dõi ",
-    "following_prefix": "Đang theo dõi ",
-    "following_postfix": " người"
-  },
-  "header": {
-
-  },
-  "comment": {
-    "place_holder": "Thêm bình luận..."
-  },
-  "image_uploader": {
-    "drag_box_description": "Kéo ảnh và thả vào đây, hoặc click để lựa chọn",
-    "caption_place_holder": "Viết gì đó về ảnh này...",
-    "upload_button": "Đăng"
-  },
-  "post": {
-
-  },
-  "profile_picture": {
-    "photo_grid": {
-      "photo_year": "/",
-      "photo_month": "/",
-      "photo_day": "/"
-    }
+    "lang": "ngôn ngữ"
   }
 }

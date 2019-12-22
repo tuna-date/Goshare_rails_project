@@ -25,20 +25,20 @@ i.Nav {
 
 .Nav-brand-logo {
   display: block;
-  /* background-position: -176px 0px; */
-  background-image: url(../../images/GoShare.png);
-  background-size: 144px 29px;
+  background-position: -176px 0px;
+  background-image: url(../../images/sprite.png);
+  background-size: 405px 379px;
   background-repeat: no-repeat;
-  width: 384px;
-  height: 78px;
+  height: 35px;
+  width: 176px;
   text-indent: -1000%;
 }
 
-.Nav-brand>a:hover {
+.Nav-brand > a:hover {
   text-decoration: none !important;
 }
 
-.Nav-brand>a {
+.Nav-brand > a {
   font-size: 1.2rem;
   padding: 0.25rem;
   line-height: 1.5;
@@ -119,11 +119,11 @@ a:hover {
   list-style-type: none;
 }
 
-.dd-input+.dd-menu {
+.dd-input + .dd-menu {
   display: none;
 }
 
-.dd-input:checked+.dd-menu {
+.dd-input:checked + .dd-menu {
   display: block;
 }
 

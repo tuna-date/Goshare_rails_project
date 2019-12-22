@@ -1,11 +1,9 @@
-<!-- <h1 align="center">GoShare👋</h1> -->
-
-<p align="center">
-  <img src="/frontend/src/images/GoShare.png" height="117" width="576" />
-</p>
+<h1 align="center">GoShare👋</h1>
 <p>
   <img src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
 </p>
+
+![](/image/logo.png)
 
 ## Description
 

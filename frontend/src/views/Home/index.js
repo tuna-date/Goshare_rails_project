@@ -1,31 +1,28 @@
-import React, { useState, useEffect } from "react";
-import Post from "../../components/Post";
-import { BackTop } from "antd";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import Post from '../../components/Post';
+import { BackTop } from 'antd';
+import axios from 'axios';
 
 export default function Home() {
   const [items, setItems] = useState([]);
   const [page, setPage] = useState(2);
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
     fecthData(1);
   }, []);
 
-  const fecthData = async (page) => {
-    var token = await localStorage.getItem("token");
-    var url = "http://localhost:5050/newfeed/" + page;
+  const fecthData = async page => {
+    var token = await localStorage.getItem('token');
+    var url = 'http://localhost:5050/newfeed/' + page;
     var req = await axios.get(url, {
       headers: { Authorization: token }
     });
-    setItems((items) => items.concat(req.data));
+    setItems(items => items.concat(req.data));
   };
 
-  const handleScroll = (e) => {
-    if (
-      window.innerHeight + window.scrollY >=
-      (page - 1) * 10 * document.body.offsetHeight
-    ) {
+  const handleScroll = e => {
+    if (window.innerHeight + window.scrollY >= (page - 1) * 10 * document.body.offsetHeight) {
       fecthData(page);
       setPage(page + 1);
     }
