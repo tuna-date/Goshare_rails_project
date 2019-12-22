@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { ActionCableConsumer } from "react-actioncable-provider";
-import axios from "axios";
-import { BackTop } from "antd";
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { ActionCableConsumer } from 'react-actioncable-provider';
+import axios from 'axios';
+import { BackTop } from 'antd';
 
-import "./Profile.css";
-import ProfilePicture from "../../components/ProfilePicture";
+import './Profile.css';
+import ProfilePicture from '../../components/ProfilePicture';
 
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
@@ -14,8 +14,8 @@ function Profile(props) {
   const [profileData, setProfileData] = useState({});
 
   const { userData } = props.location.state;
-  const content = useSelector((state) => state);
-  var token = localStorage.getItem("token");
+  const content = useSelector(state => state);
+  var token = localStorage.getItem('token');
 
   const { t } = useTranslation();
 
@@ -73,10 +73,7 @@ function Profile(props) {
 
   return (
     <div className='body-area'>
-      <ActionCableConsumer
-        channel='NotificationChannel'
-        onReceived={handleReceivedConversation}
-      />
+      <ActionCableConsumer channel='NotificationChannel' onReceived={handleReceivedConversation} />
       <div className='content'>
         <div className='profile row'>
           <div className='col-4'>
@@ -88,11 +85,10 @@ function Profile(props) {
             <div className='col'>
               <div className='row margin_botton justify-content-around'>
                 <p className='userName profile-content'>{profileData.name}</p>
-                <button type='button' className='btn btn-light'>
-                  {t("profile_page.profile_edit_button")}
-                </button>
                 {profileData.id === content.LoginStatus.userID ? (
-                  ""
+                  <button type='button' className='btn btn-light'>
+                    {t("profile_page.profile_edit_button")}
+                  </button>
                 ) : profileData.is_following_by_current_user ? (
                   <button
                     type='button'
