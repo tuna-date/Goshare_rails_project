@@ -109,6 +109,18 @@ class Post extends Component {
               ) : (
                 ""
               )}
+              <div style={{ padding: 5, textAlign: "left" }}>
+                <strong>{nickname}</strong>
+                <br></br>
+                {caption}
+                <br></br>
+                <img src={checkin} alt='Check-in' height='24'></img> {location}
+                {/* <hr></hr> */}
+                <Comment
+                  id={this.props.id}
+                  updateCommentNumber={this.setCommentNumber}
+                />
+              </div>
             </div>
           </div>
         </Modal>
