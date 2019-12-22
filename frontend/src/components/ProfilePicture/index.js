@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import Modal from 'react-awesome-modal';
-import './ProfilePicture.css';
+import React, { useState } from "react";
+import Modal from "react-awesome-modal";
+import "./ProfilePicture.css";
 
 function ProfilePicture(props) {
   const [visible, setVisible] = useState(false);
@@ -21,11 +21,11 @@ function ProfilePicture(props) {
             <time className='photo-date'>
               <span>
                 <span></span>
-                <span>26日 </span>
+                <span>2013年 </span>
                 <span></span>
                 <span>10月 </span>
                 <span></span>
-                <span>2013年 </span>
+                <span>26日 </span>
                 <span></span>
               </span>
             </time>
@@ -34,10 +34,15 @@ function ProfilePicture(props) {
               width='721px'
               height='500px'
               effect='fadeInUp'
-              onClickAway={closeModal}>
+              onClickAway={closeModal}
+            >
               <div className='row'>
                 <div className='col-8'>
-                  <img className='modal-size row' alt={props.imageUrl} src={props.imageUrl} />
+                  <img
+                    className='modal-size row'
+                    alt={props.imageUrl}
+                    src={props.imageUrl}
+                  />
                 </div>
                 <div className='col-4'>hello</div>
               </div>

@@ -1,25 +1,26 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import Modal from 'react-awesome-modal';
-import { useTranslation } from 'react-i18next';
-import i18next from 'i18next';
-import { ActionCableConsumer } from 'react-actioncable-provider';
-import { notification } from 'antd';
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import Modal from "react-awesome-modal";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
+import { ActionCableConsumer } from "react-actioncable-provider";
+import { notification } from "antd";
 
-import './Header.css';
-import ImageUpload from '../ImageUpload';
+import "./Header.css";
+import ImageUpload from "../ImageUpload";
 
 function Header(props) {
   const [visible, setvisible] = useState(false);
 
   // const { userData } = props.location.state;
-  const content = useSelector(state => state);
+  const content = useSelector((state) => state);
 
   const { t } = useTranslation();
 
   function handleClick(lang) {
     i18next.changeLanguage(lang);
+    localStorage.setItem("language", lang);
   }
 
   function handleReceivedConversation(response) {
@@ -30,13 +31,17 @@ function Header(props) {
 
   function openNotification(follower) {
     notification.open({
-      message: follower + ' start following you',
-      description: `Be the inspiration for ${follower} !!`
+      message: follower + " started following you",
+      description: `Be the inspiration for ${follower} !`
       // onClick: () => {
       //   console.log("Notification Clicked!");
       // }
     });
   }
+
+  useEffect(() => {
+    i18next.changeLanguage(localStorage.getItem("language"));
+  }, []);
 
   return (
     <nav className='Nav'>
@@ -53,29 +58,29 @@ function Header(props) {
           {content.LoginStatus.isLogin ? (
             <div className='row'>
               <label className='dropdown'>
-                <div className='dd-button'>{t('nav.lang')}</div>
+                <div className='dd-button'>{t("nav.lang")}</div>
 
                 <input type='checkbox' className='dd-input' id='test' />
 
                 <ul className='dd-menu'>
-                  <li onClick={() => handleClick('en')}>
+                  <li onClick={() => handleClick("en")}>
                     <div className='col'>
                       <div className='row'>
-                        <div className='col'>EN</div>
+                        <div className='col'>English</div>
                       </div>
                     </div>
                   </li>
-                  <li onClick={() => handleClick('vn')}>
+                  <li onClick={() => handleClick("vn")}>
                     <div className='col'>
                       <div className='row'>
-                        <div className='col'>VN</div>
+                        <div className='col'>Tiếng Việt</div>
                       </div>
                     </div>
                   </li>
-                  <li onClick={() => handleClick('jp')}>
+                  <li onClick={() => handleClick("jp")}>
                     <div className='col'>
                       <div className='row'>
-                        <div className='col'>JP</div>
+                        <div className='col'>日本語</div>
                       </div>
                     </div>
                   </li>
@@ -89,12 +94,13 @@ function Header(props) {
                 width='721px'
                 height='500px'
                 effect='fadeInUp'
-                onClickAway={() => setvisible(false)}>
+                onClickAway={() => setvisible(false)}
+              >
                 <ImageUpload close={() => setvisible(false)} />
               </Modal>
               <Link
                 to={{
-                  pathname: '/profile',
+                  pathname: "/profile",
                   state: {
                     userData: {
                       name: content.LoginStatus.name,
@@ -102,7 +108,8 @@ function Header(props) {
                       user_profile_id: content.LoginStatus.userID
                     }
                   }
-                }}>
+                }}
+              >
                 <div className='Post-user-nav'>
                   <div className='Post-user-avatar'>
                     <img alt='avatar' src={content.LoginStatus.image} />
