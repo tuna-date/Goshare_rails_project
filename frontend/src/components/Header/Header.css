@@ -30,20 +30,23 @@ i.Nav {
   background-size: 144px 29px;
   background-repeat: no-repeat;
   width: 384px;
-  height: 78px;
   text-indent: -1000%;
 }
 
-.Nav-brand>a:hover {
+.Nav-brand > a:hover {
   text-decoration: none !important;
 }
 
-.Nav-brand>a {
+.Nav-brand > a {
   font-size: 1.2rem;
   padding: 0.25rem;
   line-height: 1.5;
   font-weight: 500;
   color: black;
+}
+
+.Nav-brand > .row {
+  margin: auto;
 }
 
 .Post-user-nav {
@@ -73,6 +76,7 @@ a:hover {
 .dropdown {
   display: inline-block;
   z-index: 9999;
+  margin: auto;
   /* position: relative; */
 }
 
@@ -119,11 +123,11 @@ a:hover {
   list-style-type: none;
 }
 
-.dd-input+.dd-menu {
+.dd-input + .dd-menu {
   display: none;
 }
 
-.dd-input:checked+.dd-menu {
+.dd-input:checked + .dd-menu {
   display: block;
 }
 
