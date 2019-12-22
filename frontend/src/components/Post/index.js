@@ -1,30 +1,30 @@
-import React, { Component } from 'react';
-import Comment from '../Comment';
-import Modal from 'react-awesome-modal';
-import { Link } from 'react-router-dom';
-import { Rate } from 'antd';
+import React, { Component } from "react";
+import Comment from "../Comment";
+import Modal from "react-awesome-modal";
+import { Link } from "react-router-dom";
+import { Rate } from "antd";
 
-import './Post.css';
+import "./Post.css";
 
-const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
+const desc = ["terrible", "bad", "normal", "good", "wonderful"];
 
 class Post extends Component {
   constructor(props) {
     super(props);
     this.state = {
       visible: false,
-      starNumber: 2,
+      starNumber: 3,
       commentNumber: 0
     };
   }
 
-  handleChange = star => {
+  handleChange = (star) => {
     this.setState({
       starNumber: star
     });
   };
 
-  setCommentNumber = comment => {
+  setCommentNumber = (comment) => {
     this.setState({
       commentNumber: comment
     });
@@ -43,7 +43,7 @@ class Post extends Component {
   };
 
   like = () => {
-    console.log('like');
+    console.log("like");
   };
 
   render() {
@@ -57,12 +57,13 @@ class Post extends Component {
         <header>
           <Link
             to={{
-              pathname: '/profile',
+              pathname: "/profile",
               state: {
                 userData: this.props.data
               }
             }}
-            params={{ user_name: nickname }}>
+            params={{ user_name: nickname }}
+          >
             <div className='Post-user'>
               <div className='Post-user-avatar'>
                 <img src={avatar} alt={nickname} />
@@ -78,7 +79,8 @@ class Post extends Component {
           width='721px'
           height='500px'
           effect='fadeInUp'
-          onClickAway={() => this.closeModal()}>
+          onClickAway={() => this.closeModal()}
+        >
           <div className='row'>
             <div className='col-8'>
               <img className='modal-size row' alt={caption} src={image} />
@@ -93,7 +95,7 @@ class Post extends Component {
               <br />
               <strong>Rating:</strong>
               <Rate
-                style={{ fontSize: '20px', display: 'inline-block !important' }}
+                style={{ fontSize: "20px", display: "inline-block !important" }}
                 tooltips={desc}
                 onChange={this.handleChange}
                 value={this.state.starNumber}
@@ -103,7 +105,7 @@ class Post extends Component {
                   <strong>{desc[this.state.starNumber - 1]}</strong>
                 </span>
               ) : (
-                ''
+                ""
               )}
             </div>
           </div>
@@ -122,7 +124,9 @@ class Post extends Component {
               </div>
               <div className='row like_long'>
                 <ion-icon name='text'></ion-icon>
-                <strong className='like_number'>{this.state.commentNumber}</strong>
+                <strong className='like_number'>
+                  {this.state.commentNumber}
+                </strong>
               </div>
             </div>
           </div>
@@ -133,7 +137,10 @@ class Post extends Component {
           {caption}
         </div>
         <hr></hr>
-        <Comment id={this.props.id} updateCommentNumber={this.setCommentNumber} />
+        <Comment
+          id={this.props.id}
+          updateCommentNumber={this.setCommentNumber}
+        />
       </article>
     );
   }

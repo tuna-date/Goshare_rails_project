@@ -16,7 +16,7 @@
     "follow_button": "Follow",
     "unfollow_button": "Unfollow",
     "post": " posts",
-    "follower": " follower ",
+    "follower": " followers ",
     "following_prefix": "Following ",
     "following_postfix": " users"
   },
@@ -26,9 +26,10 @@
     "upload_button": "Upload"
   },
   "image_uploader": {
-    "drag_box_description": "Choose a picture or drag it here",
+    "drag_box_description": "Choose a picture or drag and drop it here",
     "caption_place_holder": "Tell others more about this picture...",
-    "upload_button": "Upload"
+    "location_place_holder": "Add a location",
+    "upload_button": "Post"
   },
   "post": {},
   "profile_picture": {
