@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import Modal from 'react-awesome-modal';
 import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
+import { ActionCableConsumer } from 'react-actioncable-provider';
+import { notification } from 'antd';
 
 import './Header.css';
 import ImageUpload from '../ImageUpload';
@@ -20,10 +22,30 @@ function Header(props) {
     i18next.changeLanguage(lang);
   }
 
+  function handleReceivedConversation(response) {
+    if (response.to === content.LoginStatus.name) {
+      openNotification(response.from);
+    }
+  }
+
+  function openNotification(follower) {
+    notification.open({
+      message: follower + ' start following you',
+      description: `Be the inspiration for ${follower} !!`
+      // onClick: () => {
+      //   console.log("Notification Clicked!");
+      // }
+    });
+  }
+
   return (
     <nav className='Nav'>
       <div className='Nav-menus'>
         <div className='Nav-brand row justify-content-between'>
+          <ActionCableConsumer
+            channel='NotificationChannel'
+            onReceived={handleReceivedConversation}
+          />
           <Link className='Nav-brand-logo' to='/'>
             Instagram
           </Link>
