@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Modal from "react-awesome-modal";
+import { useTranslation } from "react-i18next";
 import "./ProfilePicture.css";
 
 function ProfilePicture(props) {
@@ -13,6 +14,8 @@ function ProfilePicture(props) {
     setVisible(false);
   };
 
+  const { t } = useTranslation();
+
   return (
     <div className='wrap'>
       <ul className='photo-feed photo-grid'>
@@ -21,11 +24,11 @@ function ProfilePicture(props) {
             <time className='photo-date'>
               <span>
                 <span></span>
-                <span>2013/ </span>
+                <span>2019{t("profile_picture.photo_grid.photo_year")}</span>
                 <span></span>
-                <span>10/ </span>
+                <span>12{t("profile_picture.photo_grid.photo_month")}</span>
                 <span></span>
-                <span>26 </span>
+                <span>23{t("profile_picture.photo_grid.photo_day")}</span>
                 <span></span>
               </span>
             </time>
