@@ -6,6 +6,9 @@ import { Redirect } from 'react-router';
 
 import './ImageUpload.css';
 
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
+
 const thumbsContainer = {
   display: 'flex',
   flexDirection: 'row',
@@ -49,6 +52,8 @@ function ImageUpload(props) {
   const [commentText, setCommentText] = useState('');
   const [files, setFiles] = useState([]);
   const [redirect, setRedirect] = useState(false);
+
+  const { t } = useTranslation();
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
@@ -138,7 +143,7 @@ function ImageUpload(props) {
       <section className='container'>
         <div className='drag-box' {...getRootProps({ className: 'dropzone' })}>
           <input {...getInputProps()} />
-          <p>Drag 'n' drop some images here, or click to select images</p>
+          <p>{t("image_uploader.drag_box_description")}</p>
         </div>
         <aside style={thumbsContainer} onClick={removeImage}>
           {thumbs}
@@ -147,12 +152,12 @@ function ImageUpload(props) {
           type='text'
           className='form-control'
           value={commentText}
-          placeholder='Viet gi do di !!!'
+          placeholder={t("image_uploader.caption_place_holder")}
           onChange={e => setCommentText(e.target.value)}
         />
         <div className='botton-area'>
           <button className='btn btn-light' onClick={handleUpload}>
-            Upload
+            {t("image_uploader.upload_button")}
           </button>
         </div>
       </section>

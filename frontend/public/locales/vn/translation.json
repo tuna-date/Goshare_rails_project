@@ -10,9 +10,7 @@
       "login_button": "Đăng nhập"
     }
   },
-  "home_page": {
-
-  },
+  "home_page": {},
   "profile_page": {
     "profile_edit_button": "Chỉnh sửa trang cá nhân",
     "follow_button": "Theo dõi",
@@ -22,20 +20,17 @@
     "following_prefix": "Đang theo dõi ",
     "following_postfix": " người"
   },
-  "header": {
-
-  },
+  "header": {},
   "comment": {
-    "place_holder": "Thêm bình luận..."
+    "place_holder": "Thêm bình luận...",
+    "upload_button": "Đăng"
   },
   "image_uploader": {
     "drag_box_description": "Kéo ảnh và thả vào đây, hoặc click để lựa chọn",
     "caption_place_holder": "Viết gì đó về ảnh này...",
     "upload_button": "Đăng"
   },
-  "post": {
-
-  },
+  "post": {},
   "profile_picture": {
     "photo_grid": {
       "photo_year": "/",
