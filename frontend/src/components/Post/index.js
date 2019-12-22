@@ -4,6 +4,7 @@ import Modal from "react-awesome-modal";
 import { Link } from "react-router-dom";
 import { Rate } from "antd";
 
+import checkin from "../../images/check-in.png";
 import "./Post.css";
 
 const desc = ["terrible", "bad", "normal", "good", "wonderful"];
@@ -51,6 +52,7 @@ class Post extends Component {
     const avatar = this.props.avatar;
     const image = this.props.image;
     const caption = this.props.caption;
+    const location = this.props.location;
 
     return (
       <article className='Post' ref='Post'>
@@ -93,7 +95,7 @@ class Post extends Component {
                 src={`https://www.google.com/maps/embed/v1/place?q=${this.props.location}&key=${process.env.REACT_APP_GOOGLEMAP_KEY}`}
               />
               <br />
-              <strong>Rating:</strong>
+              <strong>Rating</strong>
               <Rate
                 style={{ fontSize: "20px", display: "inline-block !important" }}
                 tooltips={desc}
@@ -135,8 +137,9 @@ class Post extends Component {
         <div className='Post-caption text-left'>
           <strong>{nickname} </strong>
           {caption}
+          <br></br>
+          <img src={checkin} alt='Check-in' height='24'></img> {location}
         </div>
-        <hr></hr>
         <Comment
           id={this.props.id}
           updateCommentNumber={this.setCommentNumber}
