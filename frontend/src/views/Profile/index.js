@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { ActionCableConsumer } from 'react-actioncable-provider';
-import axios from 'axios';
-import { BackTop } from 'antd';
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { ActionCableConsumer } from "react-actioncable-provider";
+import axios from "axios";
+import { BackTop } from "antd";
 
-import './Profile.css';
-import ProfilePicture from '../../components/ProfilePicture';
+import "./Profile.css";
+import ProfilePicture from "../../components/ProfilePicture";
 
 function Profile(props) {
   const [profileData, setProfileData] = useState({});
 
   const { userData } = props.location.state;
-  const content = useSelector(state => state);
-  var token = localStorage.getItem('token');
+  const content = useSelector((state) => state);
+  var token = localStorage.getItem("token");
 
   useEffect(() => {
     fetchUserData();
@@ -68,7 +68,10 @@ function Profile(props) {
 
   return (
     <div className='body-area'>
-      <ActionCableConsumer channel='NotificationChannel' onReceived={handleReceivedConversation} />
+      <ActionCableConsumer
+        channel='NotificationChannel'
+        onReceived={handleReceivedConversation}
+      />
       <div className='content'>
         <div className='profile row'>
           <div className='col-4'>
@@ -84,13 +87,21 @@ function Profile(props) {
                   Chinh sua trang ca nhan
                 </button>
                 {profileData.id === content.LoginStatus.userID ? (
-                  ''
+                  ""
                 ) : profileData.is_following_by_current_user ? (
-                  <button type='button' className='btn btn-light' onClick={unfollowUser}>
+                  <button
+                    type='button'
+                    className='btn btn-light'
+                    onClick={unfollowUser}
+                  >
                     Huy theo doi
                   </button>
                 ) : (
-                  <button type='button' className='btn btn-light' onClick={followUser}>
+                  <button
+                    type='button'
+                    className='btn btn-light'
+                    onClick={followUser}
+                  >
                     Theo doi
                   </button>
                 )}
@@ -102,10 +113,12 @@ function Profile(props) {
                   <strong>{profileData.posts_count}</strong> Bai viet
                 </p>
                 <p className='col-4 profile-content'>
-                  <strong>{profileData.followers_count}</strong> nguoi theo doi ban
+                  <strong>{profileData.followers_count}</strong> nguoi theo doi
+                  ban
                 </p>
                 <p className='col-5 profile-content'>
-                  Ban dang theo doi <strong>{profileData.following_count}</strong> nguoi
+                  Ban dang theo doi{" "}
+                  <strong>{profileData.following_count}</strong> nguoi
                 </p>
               </div>
             </div>
@@ -118,7 +131,10 @@ function Profile(props) {
           ? profileData.posts.map((imageUrl, index) => (
               <ProfilePicture key={index} imageUrl={imageUrl.image_url} />
             ))
-          : ''}
+          : ""}
+      </div>
+      <div>
+        <BackTop />
       </div>
       <div>
         <BackTop />

@@ -25,12 +25,11 @@ i.Nav {
 
 .Nav-brand-logo {
   display: block;
-  background-position: -176px 0px;
-  background-image: url(../../images/sprite.png);
-  background-size: 405px 379px;
+  /* background-position: -176px 0px; */
+  background-image: url(../../images/GoShare.png);
+  background-size: 144px 29px;
   background-repeat: no-repeat;
-  height: 35px;
-  width: 176px;
+  width: 384px;
   text-indent: -1000%;
 }
 
@@ -44,6 +43,10 @@ i.Nav {
   line-height: 1.5;
   font-weight: 500;
   color: black;
+}
+
+.Nav-brand > .row {
+  margin: auto;
 }
 
 .Post-user-nav {
@@ -73,6 +76,7 @@ a:hover {
 .dropdown {
   display: inline-block;
   z-index: 9999;
+  margin: auto;
   /* position: relative; */
 }
 
